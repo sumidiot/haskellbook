@@ -40,12 +40,6 @@ Actually, easiest to write it out as function of 3 arguments, with 2 applied:
     * `z`
 * `\z . [z]`
 
-#### Equivalence Exercises
-
-1. b
-2. c
-3. b
-
 **beta normal form** - can't beta reduce further
 
 **combinator** - lambda with no free variables
@@ -54,18 +48,28 @@ Actually, easiest to write it out as function of 3 arguments, with 2 applied:
 **divergence** - reduction never terminates
 * \omega term: `(\x . xx)(\x . xx)`
 
+### Exercises
+
+#### Equivalence Exercises
+
+1. b
+2. c
+3. b
+
 #### Chapter Exercises
 
 Combinators: 1, 3, 4
+
 Normal form: 1 is in normal form, 2 diverges (\alpha= \omega), 3 normal form is zzz
+
 Beta:
-    1. z: `(\wv .w)(z)(z)`
-    2. bb: `(\a . z)bb`
-    3. qq: `(\x . xx)(\z .zq) = (\z . zq)(\z .zq) = (\z . zq)q = qq`
-    4. yy (same as 3)
-    5. yy: `(\y . y)yy = yy`
-    6. aac: `(\b . ba)(\b . ba)c = (\b . ba)ac = aac`
-    7. \z . za: `\z . [((\x.z)(z))((\x.a)(z))]`
+1. z: `(\wv .w)(z)(z)`
+2. bb: `(\a . z)bb`
+3. qq: `(\x . xx)(\z .zq) = (\z . zq)(\z .zq) = (\z . zq)q = qq`
+4. yy (same as 3)
+5. yy: `(\y . y)yy = yy`
+6. aac: `(\b . ba)(\b . ba)c = (\b . ba)ac = aac`
+7. \z . za: `\z . [((\x.z)(z))((\x.a)(z))]`
 
 
 ### Meetup Discussion
@@ -74,4 +78,4 @@ Beta:
 
 1. Answer to Combinator.3 says: "in `\xyz . zy(zx)` the head is `\xyz.` and the body is `zy(zx)`".
    Why is it not `[\xyz . zy](zx)`? And would that mean [x := zx] or [x := z, y := x]?
-2. The `z1` answer in 7 shows some entertaining subtlety
+2. The `z1` answer in beta reduction exercise 7 shows some entertaining subtlety
