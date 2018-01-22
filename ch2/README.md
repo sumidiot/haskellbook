@@ -59,7 +59,9 @@ Division
 
 (*30) is called "slicing" or "sectioning", creates partially applied function
 
-`let` introduces an _expression_, `where` is a _declaration_, but i still don't quite parse those examples
+`let` introduces an _expression_, `where` is a _declaration_, but i still don't quite parse those examples.
+The chapter notes point to the [haskellwiki](https://wiki.haskell.org/Let_vs._Where), which
+shows some more examples/differences/advantages.
 
 ### Exercises
 
