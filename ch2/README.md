@@ -17,7 +17,7 @@ Expression vs Declaration:
 Reducible expressions are called "redexes"
 
 Argument vs Parameter:
-* _arguments_ are passed to the function's _parameters
+* _arguments_ are passed to the function's _parameters_
 
 Define a function in ghci (pre-8.0.1):
 * `let triple x = x * 3`
@@ -29,28 +29,11 @@ Haskell evaluates to "weak head normal form" by default
 
 `(\f -> (1,2+f)) 2` yields `(1,4)` in repl
 
-#### 2.5 Exercises
-
-1. `let half x = x / 2` or `(\x -> x / 2)` if you don't need the name
-   `let square x = x * x`
-2. `let area r = 3.14 * (r * r)`
-3. `let area r = pi * (r * r)`
-
-#### 2.6
-
 `id` is builtin, `id x = x`
 
 **operators** are functions that can be used in infix style
 * You can use a function infix with backticks: 10 `div` 4
 * You can use an infix as prefix with parens: `(+) 10 4`
-
-#### Parens + Association Exercises
-
-1. changes
-2. doesn't change
-3. changes
-
-#### 2.7
 
 Order of declarations doesn't matter if you load a file.
 
@@ -61,17 +44,6 @@ Indent under the beginning of an expression if you continue to a line, all to th
 Indentation of first declaration determines required indentation for all subsequent lines in file.
 
 `--` is used for comments
-
-##### Exercises: Heal the Sick
-
-1. `let area x = 3.14 * (x * x)`
-2. `let double x = x * 2`
-3.
-    x = y
-    y = 10
-    f = f + y
-
-#### 2.8 - Arithmetic
 
 Division
 * `div` is integer division, rounds down.
@@ -89,7 +61,31 @@ Division
 
 `let` introduces an _expression_, `where` is a _declaration_, but i still don't quite parse those examples
 
-##### Exercises: A Head Code
+### Exercises
+
+#### 2.5 Exercises
+
+1. `let half x = x / 2` or `(\x -> x / 2)` if you don't need the name
+   `let square x = x * x`
+2. `let area r = 3.14 * (r * r)`
+3. `let area r = pi * (r * r)`
+
+#### Parens + Association Exercises
+
+1. changes
+2. doesn't change
+3. changes
+
+#### Heal the Sick Exercises
+
+1. `let area x = 3.14 * (x * x)`
+2. `let double x = x * 2`
+3.
+    x = y
+    y = 10
+    f = f + y
+
+#### A Head Code Exercises
 
 1. 5
 2. 25
