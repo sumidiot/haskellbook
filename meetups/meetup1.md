@@ -27,9 +27,9 @@ doesn't fit everybody's diet goals or restrictions).
 We had 15 folks from 13 different companies, which was awesome.
 
 In addition to the haskell book (see the meetup group for the discount code!),
-[Category Theory for Programmers]()
+[Category Theory for Programmers](https://github.com/hmemcpy/milewski-ctfp-pdf)
 was also brought up. The
-[printed version]()
+[printed version](http://www.lulu.com/shop/bartosz-milewski/category-theory-for-programmers/hardcover/product-23389988.html)
 got high recommendations from a few of us (myself included).
 
 ### Discussions (might be disjointed notes)
@@ -69,28 +69,30 @@ with things like currying, and maybe it does for some folks, but I think you can
 grok currying without chapter 1. Again, time will tell. An entertaining analogy
 was drawn to replacing your language with 1 vowel and 1 consonant.
 
-[Guy Steel junior]() has talk from 80s,
-[growing a language]().
+Guy Steel junior has talk from 80s,
+[growing a language](https://www.youtube.com/watch?v=_ahvzDzKdB0).
 
 Python is broken: you can't do everything you'd do in a def as you would in a lambda.
 (or maybe I got that backwards?)
 
 Vivek presented his way of thinking about lambda calculus, which is much more
 visual. He mentioned the
-[de Bruijn notation](),
+[de Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation),
 and brought up how `\x . xx` is called a mockingbird (repeats its input).
 He also presented his visualization app, which we should try to get a link/video for.
 
-The [y-combinator]() finds fixed points (`p` such that `f(p)=p`). It does this by
+The [y-combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed_point_combinators_in_lambda_calculus)
+finds fixed points (`p` such that `f(p)=p`). It does this by
 repeated application. You can simulate this by finding `cos` of something on a calculator,
 and then cos of that, and cos of that, etc. Note that the y-combinator gives you
 recursion - lambdas don't have names, so how could they call themselves?
-There's also a
-[z-combinator](),
+And, yes,
+[y-combinator](http://www.ycombinator.com)
+definitely got their name from this construct. There's also a z-combinator,
 which can be used for things like converting a tree graph to a linear structure.
 
 The scala community has new compiler,
-[dotty](),
+[dotty](http://dotty.epfl.ch/),
 which is sort of Odersky's experimental compiler but probably becoming scala 3.0.
 He wanted to check if things added to scala were sound.
 Foundation of dotty simplifies scala syntax (core), and he built a prover.
@@ -102,7 +104,7 @@ on the value. I brought up the example of lists of a particular length, and how
 the return type of `concatenate` takes into account the size of the input types.
 And how you can show your compiler that `reverse` doesn't change the size of a list.
 The
-[idris book]()
+[idris book](https://www.manning.com/books/type-driven-development-with-idris)
 was fun to read.
 
 associatve destructuring: convert nested map -> value or set of values.
@@ -114,7 +116,7 @@ ron wants more of both. loves some of clojure.
 sim: we were asking too little of compilers (tell everything types).
 program that's small vs large, or team-based or not.
 
-[strategic scala style guide]().
+[strategic scala style guide](http://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html).
 strongly typed language should look very different - write to refactor, because
 the types permit. in weaker typed language, you replace types with tests. There's
 a perception that tests that are hard to maintain or fragile. However, you _can_
@@ -123,3 +125,7 @@ the data to feed to tests) can be pretty awesome.
 
 Question about clojure? Does it derive from closures? Yep. There are no
 continuations though. set of bindings at instant in time.
+
+We did talk a little about let vs where. Brought up the
+[wiki page](https://wiki.haskell.org/Let_vs._Where)
+from the chapter notes.
