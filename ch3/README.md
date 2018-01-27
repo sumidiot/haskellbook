@@ -35,14 +35,14 @@ The type `[a]` means a list with elements of some type `a` we do not yet know.
 List operations
 * `(:)`, called _cons_, lets you add a thing to the front of a list. `:t (:)` is
     `a -> [a] -> [a]`
-* The element at the front of a list be retrieved with `head`, whose complement
-    is `tail` (that is, `tail $ cons _ == id`
+* The element at the front of a list can be retrieved with `head`, whose complement
+    is `tail` (that is, `tail $ cons _ == id`)
 * `take` is like `head` but lets you specify how many elements to take (`head == take 1`).
-    `drop` is the analog for `tail`.
+    `drop` is the complement. `(take n x) ++ (drop n x) == x`
 * `(!!)` is similar to `[]` array access in "normal" languages. `:t (!!)` is
     `[a] -> Int -> a`. `head == (!!) _ 0`
 
-Many of these operations are `unsafe` because they can throw exceptions. e.g.,
+Many of these operations are "unsafe" because they can throw exceptions. e.g.,
 `head ""` or `"" !! 4`.
 
 ### Exercises
@@ -86,6 +86,8 @@ Many of these operations are `unsafe` because they can throw exceptions. e.g.,
     1. `"Curry is awesome" ++ "!"`
     2. `"Curry is awesome" !! 4`
     3. `drop 9 "Curry is awesome"`
+
+Most of the others are [here](ChapterExercises.hs), final one [here](Reverse.hs)
 
 ### Meetup seeds
 
