@@ -11,4 +11,4 @@ Chapters:
 1. [Chapter 1](ch1): All You Need is Lambda
 2. [Chapter 2](ch2): Hello, Haskell!
 3. [Chapter 3](ch3): Strings
-
+4. [Chapter 4](ch4): Basic datatypes

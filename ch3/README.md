@@ -92,3 +92,4 @@ Most of the others are [here](ChapterExercises.hs), final one [here](Reverse.hs)
 ### Meetup seeds
 
 1. Any clean answers to `rvrs`?
+2. Notes of String performance? [Char] vs "native" String?
