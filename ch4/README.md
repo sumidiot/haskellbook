@@ -12,9 +12,11 @@ data declaration.
 `:info` gives you the datatype definitions for build-in types.
 
 When you define a function, you can use pattern matching:
+
     not :: Bool -> Bool
     not True = False
     not False = True
+
 If you do, `_` serves as a catch-all.
 
 Numeric types:
@@ -71,6 +73,7 @@ If you `import Data.Tuple`, you get the `swap` function.
 
 Here's how to implement your own `fst`, showing both the pattern matching syntax
 that's handy for defining functions, and the use of `'` in function names:
+
     fst' :: (a, b) -> a
     fst' (a, b) = a
 

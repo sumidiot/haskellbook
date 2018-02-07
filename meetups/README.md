@@ -5,3 +5,4 @@ This directory contains notes taken during
 
 Notes:
 * [meetup1](meetup1.md): Jan 22, 2018. Introductions and Chapters 1 and 2.
+* [meetup2](meetup2.md): Feb 05, 2018. Chapters 3 and 4.
