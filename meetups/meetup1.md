@@ -79,7 +79,8 @@ Vivek presented his way of thinking about lambda calculus, which is much more
 visual. He mentioned the
 [de Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation),
 and brought up how `\x . xx` is called a mockingbird (repeats its input).
-He also presented his visualization app. Here are links to a couple of YouTube videos:
+He also presented his visualization app. Here are links to a couple of YouTube videos,
+which include descriptions of the visualization approach:
 
 [Y-combinator](https://www.youtube.com/watch?v=DhHp8KaC-J0)
 
