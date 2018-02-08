@@ -79,7 +79,11 @@ Vivek presented his way of thinking about lambda calculus, which is much more
 visual. He mentioned the
 [de Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation),
 and brought up how `\x . xx` is called a mockingbird (repeats its input).
-He also presented his visualization app, which we should try to get a link/video for.
+He also presented his visualization app. Here are links to a couple of YouTube videos:
+
+[Y-combinator](https://www.youtube.com/watch?v=DhHp8KaC-J0)
+
+[One plus one](https://www.youtube.com/watch?v=DX_8Z17wfEo)
 
 The [y-combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed_point_combinators_in_lambda_calculus)
 finds fixed points (`p` such that `f(p)=p`). It does this by
