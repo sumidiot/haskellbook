@@ -60,8 +60,11 @@ If we hadn't seen it previously, list syntax that comes up in the exercises: `[1
 
 ##### End-notes
 
-monomorphism restriction is that all top-level declarations by default will have a
+The "monomorphism restriction" is that all top-level declarations by default will have a
 concreate type if it can be determined. Can add `{-# LANGUAGE NoMonomorphismRestriction #-}`
+to avoid this though.
+
+"Principal type" is the most generic type which still typechecks.
 
 ### Exercises
 
@@ -145,9 +148,33 @@ Type variable or specific type constructor?
 2. `Ord a => a -> a -> Bool`
 3. `(a, b) -> b`
 
-Given a type, write the function
+[Given a type, write the function](chExGtWf.hs)
 
 1. `i = id`
+2. `c a b = a`
+3. `c'' a b = a` is actually still a valid thing to write, both are the same
+4. `c a b = b`
+5. Many, many options, here's a few
+    1. `r = id`
+    2. `r as = as ++ as
+    3. `r as = [head as]`
+    4. `r = []`
+6. `co bc ab a = bc $ ab a
+7. `a ac = id`
+8. `a' ab a = ab a`
+
+Fix it
+
+1. [sing](chExFixIt1.hs)
+2. Just change the comparator to `<`
+3. [Arith3Broken](chExFixIt3.hs)
+
+Type-Kwon-Do
+
+1. [`h = g . f`](chExTKD1.hs)
+2. [`e = w . q`](chExTKD2.hs)
+3. [`xform (x, y) = (xz x, yz y)`](chExTKD3.hs), though there are a few other similar solutions
+4. [`munge xy ywz x = fst $ ywz $ xy x`](chExTKD4.hs)
 
 ### Meetup topic seeds
 
@@ -159,3 +186,7 @@ Given a type, write the function
 5. Anybody read Wadler's paper on making Ad-hoc polymorphism less ad-hoc?
 6. In polymorphic constants (p. 214) all the examples are numeric. Any non-numeric examples?
 7. Chapter Exercises, Multiple Choice, 3
+8. Phil mentioned in slack the impossibility of `f :: (Num a, Num b) => a -> b`. Compare, though,
+    `fromIntegral :: (Integral a, Num b) => a -> b`. Does Haskell have a notion of a `sealed` typeclass?
+    Compare, also, `f4 :: a -> [b] ; f4 a = []`.
+
