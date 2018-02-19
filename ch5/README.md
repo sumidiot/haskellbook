@@ -8,7 +8,7 @@ Numbers (e.g., 13) we'd enter at the REPL are typically resolved to a _constrain
 For example, `:type 13` is `Num a => a`, meaning some type that has evidence of being in the Num typeclass.
 
 Multiple typeclass constraints are gathered up with tuple notation,
-`(Num a, Num b) => a -> b -> b
+`(Num a, Num b) => a -> b -> b`
 
 #### 5.4 Currying 
 
@@ -19,10 +19,10 @@ Curried functions can be partially applied. If `f :: a -> b -> c` then
 
 You can uncurry functions. e.g., `(+)`, normally `Num a => a -> a -> a`, becomes `Num a => (a, a) -> a`.
 
-"higher-order" functions are functions that return functions. In Haskell, that's
+"Higher-order" functions are functions that return functions. In Haskell, that's
 basically any function of multiple arguments.
 
-"sectioning" is partial application of an infix operator
+"Sectioning" is partial application of an infix operator
 
 `elem` (type `Eq a => a -> [a] -> Bool`) checks if a thing is in a list.
 
@@ -30,28 +30,27 @@ You can use `;` to separate a `let` declaration from its definition in ghci
 
     let addStuff :: Integer -> Integer -> Integer ; addStuff a b = a + b + 5
 
-##### Polymorphism
+##### 5.5 Polymorphism
 
-"polymorphic" means "made of many forms"
+"Polymorphic" means "made of many forms"
 
-Type signatures are generally either concreate, constrained polymorphic, or parametrically polymorphic.
+Type signatures are generally either concrete, constrained polymorphic, or parametrically polymorphic.
 ad-hoc polymorphism is another name for constrained polymorphic, and is accomplished with typeclasses
 in Haskell. Parametric polymorphism is broader, means that type variables (parameters) are fully
 polymorphic.
 
 `id :: a -> a` is a parametrically polymorphic function. It can be applied to any type of data.
 Since it's so broad, the only thing it can do (basically) is return the thing you pass in.
-(basically because of exceptions)
 
 If a variable can be anything, there's little you can do with it. If the variable is constrained
 by a typeclass, there's more you can do with it, coming from the typeclass. If the variable is
 concrete, you know all the things that can be done with it.
 
-"parametricity" means the behavior of a function on the unconstrained arguments is uniform.
+"Parametricity" means the behavior of a function on the unconstrained arguments is uniform.
 (this has relationships to functors and/or natural transformations, if you get into the
 category side of things).
 
-##### Type inference
+##### 5.6 Type inference
 
 We don't always have to tell haskell the types of things, generally it can figure it out itself.
 That said, putting the types in is a good form of documentation.
@@ -61,7 +60,7 @@ If we hadn't seen it previously, list syntax that comes up in the exercises: `[1
 ##### End-notes
 
 The "monomorphism restriction" is that all top-level declarations by default will have a
-concreate type if it can be determined. Can add `{-# LANGUAGE NoMonomorphismRestriction #-}`
+concrete type if it can be determined. Can add `{-# LANGUAGE NoMonomorphismRestriction #-}`
 to avoid this though.
 
 "Principal type" is the most generic type which still typechecks.
@@ -159,7 +158,7 @@ Type variable or specific type constructor?
     2. `r as = as ++ as
     3. `r as = [head as]`
     4. `r = []`
-6. `co bc ab a = bc $ ab a
+6. `co bc ab a = bc $ ab a`
 7. `a ac = id`
 8. `a' ab a = ab a`
 
