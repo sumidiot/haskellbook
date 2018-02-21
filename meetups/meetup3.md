@@ -99,7 +99,9 @@ curry f a b = f (a, b) ++ []
 
 difference between `stack repl` and `stack ghck`? doesn't seem to be
 
-phil's side-by-side language comparison table. similar to [hyperpolyglot](http://hyperpolyglot.org/)
+[phil's](https://github.com/philvarner) side-by-side language
+[comparison table](https://github.com/philvarner/philvarner.github.io/blob/master/pages/HaskellScalaClojure.pdf).
+similar to [hyperpolyglot](http://hyperpolyglot.org/)
 (except they have scala, haskell, clojure in different tables)
 
 any other polymorphic values? `()`  isn't `[]`.
