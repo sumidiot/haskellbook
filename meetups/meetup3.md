@@ -58,10 +58,11 @@ to even print mew values in a user-defined type
 
 is the pattern more important than the optimization?
 
-it's probably the delegate pattern in Gang of Four
-scala's `implicit` keyword is what makes typeclasses better in scala than java
+it's probably the delegate pattern in Gang of Four.
+scala's `implicit` keyword is what makes typeclasses better in scala than java.
 
-Odersky's 2013 keynote, "scala with style", was really fascinating
+Odersky's 2013 keynote,
+["scala with style"](https://www.youtube.com/watch?v=kkTFx3-duc8), was really fascinating
 
 how polymorphism works in clojure... "class" makes no sense.
 
@@ -98,10 +99,11 @@ curry f a b = f (a, b) ++ []
 
 difference between `stack repl` and `stack ghck`? doesn't seem to be
 
-phil's side-by-side language comparison table. similar to hyperpolyglot (except
-they have scala, haskell, clojure in different tables)
+phil's side-by-side language comparison table. similar to [hyperpolyglot](http://hyperpolyglot.org/)
+(except they have scala, haskell, clojure in different tables)
 
-any other polymorphic types? `()`  isn't `[]`.
+any other polymorphic values? `()`  isn't `[]`.
+
 scala functional libraries include `HList` (there's also KList and ohers)
 
 http://degoes.net/articles/principled-typeclasses.
@@ -115,14 +117,15 @@ easy to determine if you are actually implementing all the required functions.
 http://eed3si9n.com/ has lots of good cats writing
 http://eed3si9n.com/herding-cats/
 
-what is it that scala can do that haskell doesn't have?
-scalacheck can generate test samples, comes from quickcheck. all these good ideas come out
-of haskell, what are we missing?
-easy to come from java. tooling. 
-scala is a good merge of functional and oo.
-kotlin is a nicer java, maybe easier for more folks to maintain.
-copy/modify/stumble-through is easier in some of the other languages.
-maybe the good parts are just moving out into other languages enough.
+what is it that scala can do that haskell doesn't have? all these good ideas come out of
+haskell, what are we missing/
+* scalacheck can generate test samples, comes from quickcheck.
+* easy to come from java. tooling. 
+* scala is a good merge of functional and oo.
+* kotlin is a nicer java, maybe easier for more folks to maintain.
+* copy/modify/stumble-through is easier in some of the other languages.
+* maybe the good parts are just moving out into other languages enough.
+* any sense asking what the haskell roadmap has next?
 
 Simon Peyton-Jones (appeal to expert)
 [draws a diagram](https://www.youtube.com/watch?v=iSmkqocn0oQ) (perhaps):
