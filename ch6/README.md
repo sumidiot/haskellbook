@@ -146,6 +146,32 @@ for example, `(read "3.4") :: Int` (though the error here is somewhat confusing,
 a method of the `Read` typeclass, which only has `readsPrec` and `readList`.
 The `Read` typeclass is in `GHC.Read`, while `read` is in `Text.Read`.
 
+##### 6.12 Instances are dispatched by type
+
+A typeclass defines the set of operations and values all instances will provide.
+An instance is a unique pairing of a typeclass and a type.
+
+It is glossed over, but `newtype` is another way to define a type, similar to `data`.
+For example, `newtype Year = Y Int` means that `Year`
+is a type, and you can construct one with something like `Y 0`.
+
+One of the examples, just to play, has a typeclass that provides a default value.
+The book recommends never _actually_ having a typeclass that provides a default value.
+They don't really say why though, besides "we'll get to it with Monoids".
+
+##### 6.13 Gimme more operations
+
+The point of this section is basically: if you try to use an operation and it comes
+from some typeclass, then that typeclass has to be a constraint on your function.
+
+You don't need to specify the typeclass constraints for a concrete type in your
+function. However, instead of using concrete types, there is some benefit to using
+constrained polymorphism, because you're sort of specifying what you're using about
+the parameters better. A method `Int -> Int` can do lots of things, coming from any
+of the typeclasses `Int` has instances of (e.g., `Ord`, `Eq`, `Num`). Instead, a
+method `Num a => a -> a` isn't going to be using the comparisons from `Ord`, just
+the operations from `Num` (addition, subtraction, multiplication).
+
 ### Exercises
 
 #### 6.5
@@ -165,8 +191,39 @@ respectively.
 3. This fails, because it is trying to `compare` things of different types
 4. This works, and returns `False`
 
+#### Chapter Exercises
+
+Multiple choice
+
+1. c
+2. a, b
+3. a
+4. c
+5. a
+
+[Does it typecheck?](chExDiT.hs)
+
+_Commentary_:
+[The link](https://wiki.haskell.org/Show_instance_for_functions)
+for why there's no `Show` for functions was a good read.
+
+Given a datatype declaration, what can we do?
+
+1. No, you need to wrap it, `Papu (Rocks "chases") (Yeah True)`
+2. Typechecks
+3. Typechecks
+4. Fails, you need to derive `Ord` for `Papu`. Note that to automatically derive `Ord`,
+    you have to have an ordering of `Rocks` and `Yeah` also.
+
 ### Meetup topic seeds
 
 1. What happens if you sort a list of `a` where the `Ord a` instance compares everything `LT`?
     What if everything compares `GT`?
     Note, `sort :: Ord a => [a] -> [a]` is in `Data.List`, so you have to `import` that first.
+2. In [scopeExperiments](scopeExperiments) I play with how to separate a type and typeclass from
+    evidence of the type being in the typeclass. Naturally, this allows multiple evidences, as
+    long as you separate scopes. You are recommended _not_ to do so, I guess it's called an
+    "orphaned instance". Instead, you're supposed to provide all evidences in the same module
+    as the type definition, and it seems like then you're losing the power of the typeclass
+    system, which is that the type shouldn't have to know about the typeclasses it implements.
+    I read a little about this [here](https://pchiusano.github.io/2018-02-13/typeclasses.html).
