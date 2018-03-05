@@ -172,6 +172,19 @@ of the typeclasses `Int` has instances of (e.g., `Ord`, `Eq`, `Num`). Instead, a
 method `Num a => a -> a` isn't going to be using the comparisons from `Ord`, just
 the operations from `Num` (addition, subtraction, multiplication).
 
+##### 6.15 Chapter Definitions
+
+Typeclass inheritance is when you have to have evidence of being in one typeclass
+before you can qualify to be in another. E.g., you have to be in `Num` to be in
+`Fractional`, so `Fractional` inherits from `Num`.
+
+Haskell has ability to create "derived instances" so you don't have to write out
+typeclass instances yourself for some typeclasses.
+
+##### 6.16 Typeclass inheritance, partial
+
+Nice chart showing some of the typeclass hierarchy we've seen in this chapter.
+
 ### Exercises
 
 #### 6.5
@@ -215,6 +228,22 @@ Given a datatype declaration, what can we do?
 4. Fails, you need to derive `Ord` for `Papu`. Note that to automatically derive `Ord`,
     you have to have an ordering of `Rocks` and `Yeah` also.
 
+[Match the types](chExMtt.hs)
+
+1. Fails, `a` isn't a standalone type (not capitalized)
+2. Fails, `1.0` is `Fractional`, not just `Num`
+3. Succeeds, fixes 2.
+4. Succeeds
+5. Succeeds, you could put any typeclass constraint in
+6. Succeeds, you could put any concrete type in
+7. Fails, the return type is an `Int`
+8. Fails, has to be `Int` not more generic `Num`
+9. Succeeds, you could put any concrete type in
+10. Succeeds
+11. Fails, has to be `Char`
+
+[Type-Kwon-Do Two](chExTKD.hs)
+
 ### Meetup topic seeds
 
 1. What happens if you sort a list of `a` where the `Ord a` instance compares everything `LT`?
@@ -227,3 +256,6 @@ Given a datatype declaration, what can we do?
     as the type definition, and it seems like then you're losing the power of the typeclass
     system, which is that the type shouldn't have to know about the typeclasses it implements.
     I read a little about this [here](https://pchiusano.github.io/2018-02-13/typeclasses.html).
+    I guess there's more power, still, to typeclasses, even if you don't allow orphaned instances,
+    that I'm just missing, or hasn't been shown in the book yet? Perhaps
+    [this page](http://w.pitula.me/2017/typeclasses-vs-polymorphism/)?
