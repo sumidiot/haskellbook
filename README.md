@@ -13,3 +13,4 @@ Chapters:
 3. [Chapter 3](ch3): Strings
 4. [Chapter 4](ch4): Basic datatypes
 5. [Chapter 5](ch5): Types
+6. [Chapter 6](ch6): Typeclasses

@@ -181,9 +181,9 @@ Type-Kwon-Do
 2. Ran across [profiling](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/profiling.html#cost-centres)
 3. stack?, e.g., [profiling](https://github.com/commercialhaskell/stack/blob/master/doc/GUIDE.md#debugging)
 4. In currying & uncurrying existing functions (p. 201 in my edition), aren't curry and uncurry backwards,
-    at least relative to curried/uncurried at the top of p.199?
+    at least relative to curried/uncurried at the top of p.199? -- No!
 5. Anybody read Wadler's paper on making Ad-hoc polymorphism less ad-hoc?
-6. In polymorphic constants (p. 214) all the examples are numeric. Any non-numeric examples?
+6. In polymorphic constants (p. 214) all the examples are numeric. Any non-numeric examples? -- Yes! `[]` but not `()`
 7. Chapter Exercises, Multiple Choice, 3
 8. Phil mentioned in slack the impossibility of `f :: (Num a, Num b) => a -> b`. Compare, though,
     `fromIntegral :: (Integral a, Num b) => a -> b`. Does Haskell have a notion of a `sealed` typeclass?
