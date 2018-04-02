@@ -118,3 +118,9 @@ For example, `intersperse 'c' "this" = "tchcics"`, while `intersperse 'c' "a" = 
     on the Y-combinator?
 2. Anybody familiar with the interest in the
     [McCarthy 91 function](https://en.wikipedia.org/wiki/McCarthy_91_function)?
+3. I found the let syntax in guards handy...
+    ```
+    | test,
+      let whatever = whatever
+      = answer
+    ```
