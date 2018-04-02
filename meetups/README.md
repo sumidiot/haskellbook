@@ -9,3 +9,5 @@ Notes:
 * [meetup3](meetup3.md): Feb 19, 2018. Chapter 5 - Types.
 * [meetup4](meetup4.md): Mar 05, 2018. Chapter 6 - Typeclasses.
 
+Some of the meetups have also inspired some exploratory code contributions to this
+repository, and they are tracked in the [topics](../topics) folder.

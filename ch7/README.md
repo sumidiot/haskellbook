@@ -96,6 +96,10 @@ the composition `putStrLn . show`, where `putStrLn :: String -> IO ()`.
 
 ### Exercises
 
+Please note that my exercise solutions below, or in the linked source files, tend to
+be pretty brief. However, [eolvwa](https://github.com/eolvwa) has kindly contributed
+some much nicer exercise writeups. I've put them in their own [folder](niceSolutions).
+
 #### 7.3 Anonymous functions
 
 [Grab bag](s7_3GrabBag.hs)
@@ -172,3 +176,6 @@ The rest of the exercises I actually [wrote](ChapterExercises.hs).
     What makes it a product type? I tend to think of tuples as product types.
 2. I got the 7.7 Guards exercise #8 wrong, because it didn't occur to me that `Num` didn't imply `Ord`.
     All the "standard" `Num` classes also have `Ord`, but that's not the same thing.
+3. [eolvwa](https://github.com/eolvwa) contributed his notes about
+    [case over unit with guard](../topics/caseOverUnitWithGuardSytax.hs), from the first meetup,
+    but it seems relevant here.
