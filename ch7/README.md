@@ -10,7 +10,7 @@
 This means that resolving the value for a named entity depends on the location in the code
 and the lexical content (like `let` and `where` clauses).
 
-#### 7.3 Anonymouse functions
+#### 7.3 Anonymous functions
 
 `\x -> x * 3` is an anonymous function. To specify it's type signature, you need to wrap
 it in parens to get the precedence - same for applying it: `(\x -> x * 3) 5`.
@@ -32,6 +32,14 @@ You can `:set -Wall` in ghci.
 #### 7.5 Case expressions
 
 Case expressions can be used with any type that has "visible" data constructors.
+A simple boolean example to show the shape/syntax is:
+
+```
+-- b some Bool
+case b of
+  True -> doTrue
+  False -> doFalse
+```
 
 #### 7.6 Higher-order functions
 
@@ -67,6 +75,8 @@ Recalling that the `Show` typeclass requires its members to have
 the composition `putStrLn . show`, where `putStrLn :: String -> IO ()`.
 
 #### 7.11 Chapter Exercises
+
+(in the exercises, below)
 
 #### 7.12 Chapter Definitions
 
