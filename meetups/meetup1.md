@@ -134,3 +134,10 @@ continuations though. set of bindings at instant in time.
 We did talk a little about let vs where. Brought up the
 [wiki page](https://wiki.haskell.org/Let_vs._Where)
 from the chapter notes.
+
+#### Postscript
+
+At some point in this meetup, we pulled up some notes with some interesting case/guard syntax.
+[eolvwa](https://github.com/eolvwa) was inspired to dig in, and has added
+[his code](../topics/caseOverUnitWithGuardSyntax.hs). It mostly seems related to [chapter 7](../ch7).
+

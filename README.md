@@ -5,7 +5,8 @@ I'm starting with a folder per chapter. Each will have notes I take while readin
 as well as my solutions to the exercises (sometimes in the notes, sometimes .hs files).
 I'm also including [notes](meetups) from the
 [Charlottesville meetup](https://www.meetup.com/Charlottesville-Haskell-Book-Reading-Group/)
-to read this book.
+to read this book, and some exploratory code organized along [topical](topics) boundaries,
+coming out of discussion during those meetups.
 
 Chapters:
 1. [Chapter 1](ch1): All You Need is Lambda
@@ -14,3 +15,5 @@ Chapters:
 4. [Chapter 4](ch4): Basic datatypes
 5. [Chapter 5](ch5): Types
 6. [Chapter 6](ch6): Typeclasses
+7. [Chapter 7](ch7): More functional patterns
+
