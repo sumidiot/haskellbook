@@ -38,7 +38,7 @@ empty set is "initial" because for any other set A, there's a (unique) map
 \emptyset -> A. The 1-element set is final, there's always a (unique) map
 to it from any set. Two useful constructs are the product,
 A\times B={(a,b)|a\in A, b\in B}, and the disjoint union,
-A\sqcup B={x | x \in A or x \in B}. Both are universal constructions,
+A\sqcup B={(X,Y) \in P(A) \times P(B) | |X| + |Y| = 1}, where P(X) denotes the set of subsets of X (a.k.a. the power set of X). Both are universal constructions,
 and are dual to eachother.
 
 After all that, a type constructor is a functor Set->Set, if you think
@@ -65,7 +65,7 @@ Note that (T(1)^6)=1 (T is a 6-th root of unity). This also means
 T^7=7, so Trees are the same as 7-tuples of trees
 ([paper](https://arxiv.org/abs/math/9405205)).
 
-You can take derivatives of types. L' = L+L, because (1/(1-x))' = 1/(1-x)^2.
+You can take derivatives of types. L' = L \dot L, because (1/(1-x))' = 1/(1-x)^2.
 Derivatives are punching a hole in a type, if you punch a hole in a line
 segment, you get two line segments.
 There's probably some [fun links](https://pavpanchekha.com/blog/zippers/derivative.html).
