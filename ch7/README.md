@@ -177,5 +177,5 @@ The rest of the exercises I actually [wrote](ChapterExercises.hs).
 2. I got the 7.7 Guards exercise #8 wrong, because it didn't occur to me that `Num` didn't imply `Ord`.
     All the "standard" `Num` classes also have `Ord`, but that's not the same thing.
 3. [eolvwa](https://github.com/eolvwa) contributed his notes about
-    [case over unit with guard](../topics/caseOverUnitWithGuardSytax.hs), from the first meetup,
+    [case over unit with guard](../topics/caseOverUnitWithGuardSyntax.hs), from the first meetup,
     but it seems relevant here.
