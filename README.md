@@ -17,4 +17,5 @@ Chapters:
 6. [Chapter 6](ch6): Typeclasses
 7. [Chapter 7](ch7): More functional patterns
 8. [Chapter 8](ch8): Recursion
+9. [Chapter 9](ch9): Lists
 
