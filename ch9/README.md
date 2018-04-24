@@ -52,7 +52,7 @@ all of which require an `Enum`. For example, `enumFromThenTo 1 3 10` is the same
 as `[1,3..10]`. Note that the first two methods, `enumFrom` and `enumFromThen`
 produce infinite lists (assuming the underlying `Enum` type is infinite).
 
-##### [Excercises](s9_5EnumFromTo.hs).
+##### [Excercises](s9_5EnumFromTo.hs)
 
 #### 9.6 Extracting portions of lists
 
@@ -64,7 +64,7 @@ produce infinite lists (assuming the underlying `Enum` type is infinite).
 
 ##### [Exercises](s9_6.hs)
 
-Note that we did exercise 1 [before](../ch4/ec/reverse.sh) but not with `takeWhile` and `dropWhile`.
+Note that we did exercise 1 [before](../ch4/ec/reverse.hs) but not with `takeWhile` and `dropWhile`.
 
 #### 9.7 List Comprehensions
 
