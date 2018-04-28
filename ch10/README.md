@@ -99,6 +99,59 @@ The exercises introduce the `Data.Time` module, with `UTCTime`, which has type
 
 #### 10.7 Folding and evaluation
 
+`foldr f z xs = foldl (flip f) z (reverse xs)` for finite `xs`
+
+#### 10.8 Summary
+
+`foldl` directly self-calls, so eats up the whole list. `foldr` ends up alternating
+between `foldr` and the `f` calls, only eating up the bits of the list that `f` keeps
+asking for.
+
+`foldr` works for infinite lists, and is a good default choice.
+
+`foldl` is nearly useless, and you should almost always use `foldl'` instead.
+
+#### 10.9 Scans
+
+The only difference in the type signature between `foldX` and `scanX` (where X=l or X=r)
+is the final output is a list in the case of `scanX`.
+
+`fibs = 1 : scanl (+) 1 fibs` defines a list recursively, entertainingly. You can then get
+the N-th value as `fibsN x = fibs !! x` (or, point-free: `fibsN = (fibs !!)`).
+
+##### Exercises
+
+1. `fibsFirst20 = take 20 fibs`
+2. `fibsLessThan100 = filter (<100) $ take 20 fibs`. Without the `take` Haskell can't tell that this
+    list isn't infinite.
+3. `factorial = scanl (*) 1 [1..]` (with this, `factorial !! 0` represents "0!" accurately)
+
+#### 10.10 Chapter Exercises
+
+
+
+#### 10.11 Definitions
+
+A **fold** is a higher function that accumulates results to build up the final value.
+
+A **catamorphism** generalizes folds from lists to arbitrary datatypes. There's definitely a pattern
+in the following catamorphisms associated with each data type, but I can't quite see it right now:
+
+1. `bool   :: a        -> a        -> Bool       -> a`
+2. `maybe  :: b        -> (a -> b) -> Maybe a    -> b`
+3. `either :: (a -> c) -> (b -> c) -> Either a b -> c`
+
+All the data declarations are 2-case. The first argument to the catamorphism is "maps from the left
+case to a new type", the second is "maps from the right case to a new type", the third is "the type",
+and the fourth is "the new type". Does this play out with list, `foldr`? Seems wonky.
+
+    data List a = [] | (a : List a)
+    foldr  :: (a -> b -> b) -> b -> List a -> b
+
+A **tail call** is is the final result of a function
+
+**tail recursion** is when the tail call is a recursive self invocation.
+
 ### Meetup topic seeds
 
 1. I found the `foldr` "here's how the expression is re-written" and, in particular "and evaluated"
@@ -113,4 +166,10 @@ The exercises introduce the `Data.Time` module, with `UTCTime`, which has type
 3. Use equational reasoning to show
     1. `foldr = head . scanr`
     2. `foldr const _ = head`
+    3. `foldr f z xs = foldl (flip f) z (reverse xs)` (for finite `xs`)
 4. The exercises in section 10.6 are fun, let's compare answers.
+5. Anybody read the [scans blog post](https://chrisdone.com/posts/twitter-problem-loeb)? Seems fun.
+6. [Beautiful folds in scala](https://softwaremill.com/beautiful-folds-in-scala/) was a fun read also
+7. Anybody have more interesting answers to the scan exercises, section 10.9
+8. The final reference sounds fun, [A tutorial on the universality and expressiveness of fold](http://www.cs.nott.ac.uk/~gmh/fold.pdf).
+9. Any idea what they're hinting at with the patterns of catamorphisms (my p.587) in 10.11?
