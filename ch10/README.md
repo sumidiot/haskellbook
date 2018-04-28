@@ -61,6 +61,7 @@ a performance hit for long lists. (`foldl'` seems to not be in my Prelude).
 1. `foldr (*) [1..5]` returns the same as `foldl (flip (*)) 1 [1..5]` and `foldl (*) 1 [1..5]`
 2. `foldl (flip (*)) 1 [1..3]` is evaluated as:
 
+    ```
     foldl (flip (*)) 1 [1..3]
       = foldl (flip (*)) ((flip (*)) 1 1) [2,3]
       = foldl (flip (*)) ((flip (*)) ((flip (*)) 1 1) 2) [3]
@@ -72,6 +73,7 @@ a performance hit for long lists. (`foldl'` seems to not be in my Prelude).
       = ((flip (*)) 2 3)
       = (*) 3 2
       = 6
+    ```
 
 3. `foldr` is different than `foldl` because it associates to the right
 4. Folds are catamorphisms, which means they are used to reduce structure
@@ -126,9 +128,7 @@ the N-th value as `fibsN x = fibs !! x` (or, point-free: `fibsN = (fibs !!)`).
     list isn't infinite.
 3. `factorial = scanl (*) 1 [1..]` (with this, `factorial !! 0` represents "0!" accurately)
 
-#### 10.10 Chapter Exercises
-
-
+#### 10.10 [Chapter Exercises](chEx.hs)
 
 #### 10.11 Definitions
 
