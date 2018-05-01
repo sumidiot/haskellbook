@@ -20,6 +20,7 @@ ssc = foldr showSumCall' (pure 0) (map pure [1..5])
 -- you do see that "5+0=5" gets computed first, but I still feel like that's more of
 -- artifact of how 1 + (2 + (3 + (4 + (5 + 0)))) is computed for the 'top level' + after the 1
 -- e.g., if we showConstCall we'd just see 1 <-const-
+-- in the below, it's different if you comment out (or otherwise munge) lines with no usage of b
 
 showConstCall :: IO Int -> IO Int -> IO Int
 showConstCall ioA ioB =
@@ -51,7 +52,6 @@ cfcc = foldr countFoldCallsConst (0,0) [1..5]
 -- foldr const 0 [1,2]
 --   = const 0 (foldr const 0 [2])
 --   = 0
---
 
 myConst :: a -> b -> a
 myConst a _ = a
@@ -59,4 +59,13 @@ myConst a _ = a
 countFoldCallsMyConst :: Int -> (Int,Int) -> (Int,Int)
 countFoldCallsMyConst r (c,r') = (1+c, myConst r r')
 
+countFoldCallsMyConst' :: Int -> (Int,Int) -> (Int,Int)
+countFoldCallsMyConst' r (c,_) = (1+c, r)
+
 cfcmc = foldr countFoldCallsMyConst (0,0) [1..5]
+
+mfr :: (a -> b -> b) -> b -> [a] -> b
+mfr f z [] = z
+mfr f z (a:as) = f a (mfr f z as)
+
+cmfcmc = mfr countFoldCallsMyConst' (0,0) [1..5]

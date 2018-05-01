@@ -18,4 +18,5 @@ Chapters:
 7. [Chapter 7](ch7): More functional patterns
 8. [Chapter 8](ch8): Recursion
 9. [Chapter 9](ch9): Lists
+10. [Chapter 10](ch10): Folding lists
 
