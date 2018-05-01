@@ -61,3 +61,7 @@ just that element, though, for example `bool' :: a -> a -> Bool -> a` could be d
 Now, the question I still haven't worked out is what's the "canonical" catamorphism
 for lists? Or what's the relationship to `foldr`?
 
+Following up after the meetup, the wikipedia page for [catamorphism](https://en.wikipedia.org/wiki/Catamorphism)
+goes a few steps deeper than we probably do for a while in the book. And it's not clear
+that my proposed notion above is correct, or just lucky in these few easy cases.
+

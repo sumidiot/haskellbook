@@ -36,5 +36,5 @@ re-joined string after reversing the order of the list of tokens. We noted that
 reversing a list isn't hard, and didn't actually talk about the join step during
 the meeting, though it was brought up in published solutions after the meeting.
 Instead, we mostly focused, during the meeting, on the exercise of writing a
-`tokenize` function. My solution is in my [ec](ec) folder for chapter 4.
+`tokenize` function. My solution is in my [ec](../ch4/ec) folder for chapter 4.
 

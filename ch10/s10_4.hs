@@ -20,17 +20,17 @@ ssc = foldr showSumCall' (pure 0) (map pure [1..5])
 -- you do see that "5+0=5" gets computed first, but I still feel like that's more of
 -- artifact of how 1 + (2 + (3 + (4 + (5 + 0)))) is computed for the 'top level' + after the 1
 -- e.g., if we showConstCall we'd just see 1 <-const-
+-- in the below, it's different if you comment out (or otherwise munge) lines with no usage of b
 
 showConstCall :: IO Int -> IO Int -> IO Int
 showConstCall ioA ioB =
   do
     print "getting a"
     a <- ioA
---    print "getting b"
---    b <- ioB
---    print $ concat [show a," <-const- ",show b,"=",show (const a b)]
-    print $ concat [show a," <-const- _ =",show a]
-    return a --(const a b)
+    print "getting b"
+    b <- ioB
+    print $ concat [show a," <-const- ",show b,"=",show (const a b)]
+    return (const a b)
 
 scc = foldr showConstCall (pure 0) (map pure [1..5])
 
@@ -50,9 +50,8 @@ cfcc = foldr countFoldCallsConst (0,0) [1..5]
 --     (x:xs)  -> f x (foldr f z xs)
 --
 -- foldr const 0 [1,2]
---   = const 1 (foldr const 0 [2])
---   = 1
---
+--   = const 0 (foldr const 0 [2])
+--   = 0
 
 myConst :: a -> b -> a
 myConst a _ = a
