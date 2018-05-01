@@ -8,20 +8,20 @@ Current Members: 42 (2 new!). RSVPed: 7
 ### Discussions
 
 I distracted the initial question of "let's try the myAny" exercise from
-the chapter exercises, with his confusion:
+the chapter exercises, with my confusion:
 
 You can work through `foldr const 0 [1..5] = 1` with equations, just replacing
 with the definitions for `foldr` and `const`, and it happens in 1 call to `const`:
 
-    `foldr const 0 [1..5]
-       = const 1 (foldr const 0 [2..5])
-       = 1`
+    foldr const 0 [1..5]
+      = const 1 (foldr const 0 [2..5])
+      = 1
 
 Now suppose we change `const` to `countConst` to track how many times it is called:
 
-    `-- add a second value to the result type (and thus second input) for 'number of times called'
+    -- add a second value to the result type (and thus second input) for 'number of times called'
     countConst :: Int -> (Int, Int) -> (Int, Int)
-    countConst a (_,c) = (a, 1+c)`
+    countConst a (_,c) = (a, 1+c)
 
 I expected that `foldr countConst 0 [1..5] = (1,1)` based on
 the evaluation above. However, it comes out as `(1,5)`. If you look very carefully,
