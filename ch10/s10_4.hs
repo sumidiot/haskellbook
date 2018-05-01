@@ -26,10 +26,11 @@ showConstCall ioA ioB =
   do
     print "getting a"
     a <- ioA
-    print "getting b"
-    b <- ioB
-    print $ concat [show a," <-const- ",show b,"=",show (const a b)]
-    return (const a b)
+--    print "getting b"
+--    b <- ioB
+--    print $ concat [show a," <-const- ",show b,"=",show (const a b)]
+    print $ concat [show a," <-const- _ =",show a]
+    return a --(const a b)
 
 scc = foldr showConstCall (pure 0) (map pure [1..5])
 
@@ -49,8 +50,8 @@ cfcc = foldr countFoldCallsConst (0,0) [1..5]
 --     (x:xs)  -> f x (foldr f z xs)
 --
 -- foldr const 0 [1,2]
---   = const 0 (foldr const 0 [2])
---   = 0
+--   = const 1 (foldr const 0 [2])
+--   = 1
 --
 
 myConst :: a -> b -> a
@@ -59,4 +60,13 @@ myConst a _ = a
 countFoldCallsMyConst :: Int -> (Int,Int) -> (Int,Int)
 countFoldCallsMyConst r (c,r') = (1+c, myConst r r')
 
+countFoldCallsMyConst' :: Int -> (Int,Int) -> (Int,Int)
+countFoldCallsMyConst' r (c,_) = (1+c, r)
+
 cfcmc = foldr countFoldCallsMyConst (0,0) [1..5]
+
+mfr :: (a -> b -> b) -> b -> [a] -> b
+mfr f z [] = z
+mfr f z (a:as) = f a (mfr f z as)
+
+cmfcmc = mfr countFoldCallsMyConst' (0,0) [1..5]
