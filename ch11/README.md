@@ -113,7 +113,34 @@ Data types with a unary constructor always have the same cardinality as the type
 2. Yes, you can tell the typeclass instances with `:info`
 3. `:t MakeExample` is `Int -> Example`
 
+#### 11.9 newtype
+
+`newtype` allows you to construct a new type that can only ever have a single unary data constructor.
+It cannot be a sum or product or nullary. However, it has no runtime overhead, because the difference
+between the `newtype` and the type it contains is eradicated by the compiler.
+
+Sometimes sum types are called "tagged unions", and product types "record" types.
+
+The first example is a `tooManyGoats :: Int -> Bool`. If you wanted a similar `tooManyCows :: Int -> Bool`
+function, there's nothing to guard against you passing the number of cows to the `tooManyGoats`
+function. If, instead, you `newtype Goats = Goats Int` then `tooManyGoats :: Goats -> Bool`,
+then you can't ask if there are too many cows (assuming another `newtype` for those) via the
+`tooManyGoats` function.
+
+A `newtype` is similar to a type synonym, in that both are eliminated by the compiler. The difference is
+that you can define typeclass instances for `newtype`s that are different from typeclass instances for the
+underlying type, and you can't do that for type synonyms.
+
+Going the other way, you might want your `newtype` to inheric typeclass instances from the
+underlying type. To do this, use the `GeneralizedNewtypeDeriving` language extension by adding
+the following "pragma" to the top of your source file: `{-# LANGUAGE GeneralizedNewtypeDeriving #-}`.
+Then, for your `newtype`, you can say `deriving T` where `T` is a typeclass for there there is
+an instance for the underlying type of the `newtype`.
+
+##### Exercises: [Logic Goats](s11_9.hs)
+
 ### Meetup topic seeds
 
 1. You can make recurisvely defined types, probably as long as you do so within the scope of one module/file.
 2. Can you do exercise 2 in 11.6 with case or guard statements?
+3. I'm pretty sure I didn't do 11.9 exercises the intended way.
