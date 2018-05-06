@@ -139,8 +139,61 @@ an instance for the underlying type of the `newtype`.
 
 ##### Exercises: [Logic Goats](s11_9.hs)
 
+#### 11.10 Sum types
+
+A type defined with `|` is a sum type. It has cardinality equal to the sum of the components.
+They are a way of expressing alternate possibilities within a single datatype.
+
+##### Exercises: Pity the Bool
+
+1. The cardinality of the type `data BigSmall = Big Bool | Small Bool` is 4, because
+    there are 2 values for `Big` (`Big False` and `Big True`) and similarly 2 for `Small`.
+2. The cardinality of `data NumberOrBool = Numba Int8 | BoolyBool Bool` is 258,
+    256 for the `Numba` values and 2 for the `BoolyBool`.
+
+In the type of exercise 2, if you try `Numba (-128)` you get an warning, because the compiler
+is worried that `negate 128` involves a value outside the range of `Int8`. You can create a
+value for `-128` (e.g., `n = (-128)`), or `:set -XNegativeLiterals`.
+
+#### 11.11 Product types
+
+Product types have cardinality equal to the product of the underlying types. Products represent
+_and_ where sums represent _or_. A product is like a `struct` in C-like languages, they're a way
+to carry multiple values around in a single constructor. A data constructor with multiple type
+arguments is a product.
+
+The canonical example is a tuple.
+
+##### Record syntax
+
+Recaords are product types with convenient field accessors.
+
+If you have a simple product type like `data Person = MkPerson String Int`, then to do
+anything with it, you have to pattern match, like `name (MkPerson s _) = s`. To re-write
+that with record syntax, it would like like:
+
+    `data Person =
+      Person { name :: String , age :: Int }`
+
+Doing this gives you two automatic functions, `name` and `age` with domain Person and the
+ranges `String` and `Int`, respectively.
+
+You still construct a record the same way, `Person "name" 13`
+
+#### 11.12 Normal form
+
+Normal algebraic rules for sums and products apply in the system. For example, the
+distributive property holds. That is, if you have a type `data T = P A R` (a product type)
+where `data A = A` and `data R = B | C`, then roughly `T` is `A * R` or `A * (B + C)`,
+which is equivalent to `A * B + A * C`, which would be `data T' = PB A B | PC A C`.
+
+Normal form is when the type is written as a sum of products.
+
+##### Exercises: [How Does Your Garden Grow](s11_12.hs)
+
 ### Meetup topic seeds
 
 1. You can make recurisvely defined types, probably as long as you do so within the scope of one module/file.
 2. Can you do exercise 2 in 11.6 with case or guard statements?
 3. I'm pretty sure I didn't do 11.9 exercises the intended way.
+4. I'm also not sure I did the 11.12 exercise the intended way.
