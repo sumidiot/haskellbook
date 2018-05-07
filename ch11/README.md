@@ -191,6 +191,41 @@ Normal form is when the type is written as a sum of products.
 
 ##### Exercises: [How Does Your Garden Grow](s11_12.hs)
 
+#### 11.13 Constructing and deconstructing values
+
+Try avoiding type synonyms with unstructured data like text or binary, because the compiler
+can fail to help you. They're best used when you want something lightweight but explicit.
+
+We've already seen a fair amount of how to construct values. Note that for types defined
+with record syntax, you can construct it as normal for a product, or you can explicitly
+write the fields. Following the `Person` example from above, you can construct a value with
+syntax like `Person "name" 13` or `Person { name = "name", age = 13 }`. Using the second
+syntax, the order doesn't matter, so you can also write `Person { age = 13, name = "name" }`.
+
+##### Exercise: [Programmers](s11_12_programmer.hs)
+
+`nub` from `Data.List` will remove duplicates from a list.
+
+Note that with record syntax, if you don't specify all the fields in the constructor you
+get a warning. The resulting value will actually basically be a bottom, you can't do
+much of anything useful with it (I guess?). The book definitely recommends against
+making partial records.
+
+#### 11.14 Function type is exponential
+
+The cardinality of the type `a -> b`, functions from `a` to `b`, is `b^a`.
+
+##### Exercises: The Quad
+
+Given `Quad` is a type with 4 inhabitants,
+
+1. `Either Quad Quad` has 4+4=8 inhabitants
+2. `(Quad, Quad)` has 4*4=16 inhabitants
+3. `Quad -> Quad` has 4^4=256 inhabitants
+4. `(Bool, Bool, Bool)` has 2*2*2=8 inhabitants
+5. `Bool -> Bool -> Bool` has (2^2)^2=16 inhabitants
+6. `Bool -> Quad -> Quad` has (2^4)^4=65536 inhabitants
+
 ### Meetup topic seeds
 
 1. You can make recurisvely defined types, probably as long as you do so within the scope of one module/file.
