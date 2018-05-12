@@ -226,9 +226,43 @@ Given `Quad` is a type with 4 inhabitants,
 5. `Bool -> Bool -> Bool` has (2^2)^2=16 inhabitants
 6. `Bool -> Quad -> Quad` has (2^4)^4=65536 inhabitants
 
+#### 11.15 Higher-kinded datatypes
+
+Kinds are the types of type constructors. The default kind is `*`. The kind `* -> *` is
+waiting for a type, and will produce a new type. Lists are higher-kinded datatypes, because
+they take a type, like `Int`, and produce a new type, `[Int]`. Higher-kinded types provide
+a generic way to express a "hole" to be filled by a consumer.
+
+For example
+`data QueryResult a = QueryResult { _meta :: QueryMetadata, result :: a }`
+provides a structure to hold query results of a type you don't know ahead of time. A library
+with such a type is likely to want to do something with the query result, which would require
+some understanding about the type of `a`. This is expressed with typeclass constraints _on the
+function consuming the result_ vs on the `QueryResult` type itself.
+
+#### 11.16 Lists are polymorphic
+
+Operators with non-alphanumeric names are infix by default. Any operator that starts with `:`
+must be an infix type or data constructor, and all infix data constructors must start with a colon.
+The type constructor `->` is an infix type constructor that doesn't start with a colon. Operators
+cannot be `::`, because that is reserved for type assertions.
+
+#### 11.17 Binary Tree
+
+We can define a binary tree type like the list type, recursively: `data Tree a = Leaf | Node (Tree a) a (Tree a)`.
+This creates a binary tree type with a value of type `a` at every inner (non-leaf) node.
+
+The book works through defining `insert` that inserts an `a` into a `Tree a`, assuming `Ord a`.
+Since Haskell's immutable, this function returns a new tree.
+
+##### [Exercises](s11_17.hs)
+
 ### Meetup topic seeds
 
 1. You can make recurisvely defined types, probably as long as you do so within the scope of one module/file.
 2. Can you do exercise 2 in 11.6 with case or guard statements?
 3. I'm pretty sure I didn't do 11.9 exercises the intended way.
 4. I'm also not sure I did the 11.12 exercise the intended way.
+5. Can you specify a type with a polymorphic constraint? We can make a function with type `Num a => a -> a`,
+    can we make a `Num a => data NumHolder a = NumHolder a`?
+
