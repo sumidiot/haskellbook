@@ -257,12 +257,54 @@ Since Haskell's immutable, this function returns a new tree.
 
 ##### [Exercises](s11_17.hs)
 
+#### 11.18 Chapter Exercises
+
+##### Multiple Choice
+
+1. a
+2. c
+3. b
+4. c
+
+##### [Ciphers](vigenere.hs)
+
+##### [As-patterns](asPatterns.hs)
+
+**As-patterns** are a way to pattern match to extract parts of a thing, while simultaneously
+being able to refer to the whole thing. So, not only do you get the `fst` and `snd` of the
+tuple as named values, you can get a named value for the tuple itself.
+
+When pattern matching, `<name>@` before a normal pattern match lets you name the whole thing
+being matched:
+
+    `f :: Show a => (a, b) -> IO (a, b)
+    f t@(a, _) = do
+      print a
+      return t`
+
+##### [Language exercises](langExs.hs)
+
+##### [Phone exercise](phone.hs)
+
+##### [Hutton's Razor](hutton.hs)
+
+#### 11.19 Definitions
+
+A datatype declaration begins with the keyword `data`. A datatype is a type constructor and zero or more
+data constructors, each of which may have zero or more arguments.
+
 ### Meetup topic seeds
 
-1. You can make recurisvely defined types, probably as long as you do so within the scope of one module/file.
-2. Can you do exercise 2 in 11.6 with case or guard statements?
+1. You can make recursively defined types, probably as long as you do so within the scope of one module/file.
+2. Can you do exercise 2 in 11.6 with case or guard statements? Seems like no, except [yes](https://wiki.haskell.org/Pattern_guard)!
 3. I'm pretty sure I didn't do 11.9 exercises the intended way.
 4. I'm also not sure I did the 11.12 exercise the intended way.
 5. Can you specify a type with a polymorphic constraint? We can make a function with type `Num a => a -> a`,
     can we make a `Num a => data NumHolder a = NumHolder a`?
-
+6. Compare answers to chapter exercises
+7. I failed to use an as-pattern in the as-pattern chapter exercise, number 2
+8. The phone chapter exercise didn't register with me. It seems a lot harder / less well-defined than the others.
+9. But it raised some fun questions:
+     1. Can you have a data constructor with validation? [Smart constructors](https://wiki.haskell.org/Smart_constructors)
+     2. Do you have to use record syntax to get simple extractors?
+10. What would a not-algebraic datatype be? Function types aren't algebraic (exponential)
