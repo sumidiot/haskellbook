@@ -72,6 +72,8 @@ probably reasons to do so.
 
 ##### [String processing](chEx-StringProcessing.hs)
 
+##### [Validate the word](chEx-ValidateTheWord.hs)
+
 ### Meetup topic seeds
 
 1. The book shows examples of how `:k Maybe a` is ok for some `a`s (e.g., `Int`, `(Maybe Int)`),
