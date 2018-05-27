@@ -19,4 +19,6 @@ Chapters:
 8. [Chapter 8](ch8): Recursion
 9. [Chapter 9](ch9): Lists
 10. [Chapter 10](ch10): Folding lists
+11. [Chapter 11](ch11): Algebraic datatypes
+12. [Chapter 12](ch12): Signaling adversity
 
