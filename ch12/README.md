@@ -74,6 +74,19 @@ probably reasons to do so.
 
 ##### [Validate the word](chEx-ValidateTheWord.hs)
 
+##### [It's only Natural](chEx-ItsOnlyNatural.hs)
+
+##### [Small library for Maybe](chEx-LibForMaybe.hs)
+
+##### [Small library for Either](chEx-LibForEither.hs)
+
+##### [Unfolds](chEx-Unfolds.hs)
+
+The dual of a catamorphism (break down) is an **anamorphism** (build up).
+
+Note that I've put solutions for the exercises in the "Finally something other than list!" section
+in the [Unfolds](chEx-Unfolds.hs) module.
+
 ### Meetup topic seeds
 
 1. The book shows examples of how `:k Maybe a` is ok for some `a`s (e.g., `Int`, `(Maybe Int)`),
@@ -84,8 +97,8 @@ probably reasons to do so.
     from a [Phantom Type](https://wiki.haskell.org/Phantom_type), which is where a type-level
     parameter doesn't show up in any data constructors, like `data T a = D`.
 3. What do we think the answer is for the 'determine the kind' chapter exercises?
-4. In chEx-StringProcessing.hs, I found a little bit of a surprise with guards. The following
-    has an issue:
+4. In [chEx-StringProcessing.hs](chEx-StringProcessing.hs), I found a little bit of a surprise
+    with guards. The following has an issue:
     ```
     go w s@(c:cs) r
       | s == ""   = r ++ (checkWord w)
@@ -95,3 +108,11 @@ probably reasons to do so.
     checkWord s = s
 
     ```
+5. In [chEx-StringProcessing.hs](chEx-StringProcessing.hs), what's a nice clean solution for
+    `countTheBeforeVowel`?
+6. In [chEx-ItsOnlyNatural.hs](chEx-ItsOnlyNatural.hs), the `integerToNat` case is at least a
+    little entertaining.
+7. In the "Unfolds" bit of chapter exercises, why does `unfoldr`'s first argument produce a
+    `Maybe (a, b)` instead of an `(a, b)`, following the `iterate` function? I guess the question
+    could well be flipped, why does `iterate` always have to be infinite?
+8. I didn't have `unfoldr` in my Prelude (I'm apparently on GHCi 7.10.3)
