@@ -108,5 +108,34 @@ it with functions like `putStrLn` or `print` that already return an `IO`.
 
 #### 13.9 Hangman game
 
+`stack new (name) simple` will create a new project with name `name`.
+
+#### 13.10 Step One: Importing modules
+
+`Control.Monad.forever` makes an infinite loop. The type is `Monad m => m a -> m b`
+
+`:t all` is `Foldable t => (a -> Bool) -> t a -> Bool` (you can think of `Foldable` as `List`
+for now).
+
+`Data.List.intersperse` shuffles a thing into all interior spots of a list. `intersperse ' ' "word"`
+is "w o r d".
+
+`System.Exit.exitSuccess` is a way to indicate that a program has ended successfully.
+
+`System.Random.randomRIO` has type `:Random a => (a, a) -> IO a`. It treats the tuple as a
+range, and gives a random item in the range.
+
+#### 13.11 Step Two: Generating a word list
+
+`lines` is a function to split a big blob string by newlines (compare `words` for splitting by spaces).
+
+`>>=`, also known as **bind**, we'll talk more about in the `Monad` chapter
+
+#### 13.12 Step Three: Making a puzzle
+
+
+
 ### Meetup topic seeds
 
+1. Favorite editor/plugins?
+2. What does `RIO` stand for in `randomRIO`? "Range IO" since `:t` is `Random a => (a, a) -> IO a`
