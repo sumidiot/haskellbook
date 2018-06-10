@@ -133,9 +133,13 @@ range, and gives a random item in the range.
 
 #### 13.12 Step Three: Making a puzzle
 
-
+#### 13.13 Adding a newtype
 
 ### Meetup topic seeds
 
 1. Favorite editor/plugins?
 2. What does `RIO` stand for in `randomRIO`? "Range IO" since `:t` is `Random a => (a, a) -> IO a`
+3. It seems like a fun/useful exercise would be to convert the hangman example to take a
+    command line argument with the number of incorrect guesses to allow
+4. There's a lot more `IO` going around in the hangman code than I'd have guessed we should
+    be trying to aim for. Can we reduce it?
