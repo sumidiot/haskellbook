@@ -6,7 +6,7 @@ import Data.Char -- exercise 3
 
 
 -- exercise 1
--- will come back to caesar and vigenere
+-- actually done in chEx-Vigenere
 
 
 -- exercise 2
