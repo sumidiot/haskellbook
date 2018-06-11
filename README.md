@@ -21,4 +21,5 @@ Chapters:
 10. [Chapter 10](ch10): Folding lists
 11. [Chapter 11](ch11): Algebraic datatypes
 12. [Chapter 12](ch12): Signaling adversity
+13. [Chapter 13](ch13): Building projects
 
