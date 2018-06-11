@@ -1,4 +1,4 @@
-## Meetup 8: Chapters 11 - Algebraic Datatypes
+## Meetup 8: Chapter 11 - Algebraic Datatypes
 
 May 14, 2018
 
