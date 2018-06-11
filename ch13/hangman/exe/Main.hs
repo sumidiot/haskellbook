@@ -1,10 +1,5 @@
 module Main where
 
--- any of these still needed?
-import Control.Monad (forever)
-import Data.Maybe (isJust)
-import System.Exit (exitSuccess)
-
 import Hangman
 import Puzzle
 

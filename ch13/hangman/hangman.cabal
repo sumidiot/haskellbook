@@ -6,7 +6,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Nick Hamblet
 maintainer:          haskellbook.com
-copyright:           2018 Author name here
+copyright:           2018 Nick Hamblet
 category:            Game
 build-type:          Simple
 cabal-version:       >=1.10

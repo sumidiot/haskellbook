@@ -143,3 +143,5 @@ range, and gives a random item in the range.
     command line argument with the number of incorrect guesses to allow
 4. There's a lot more `IO` going around in the hangman code than I'd have guessed we should
     be trying to aim for. Can we reduce it?
+5. I tried deleting the `LICENSE` file of hangman, and `stack build` failed because of it!
+    Same for the `README`!
