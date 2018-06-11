@@ -13,6 +13,7 @@ Notes:
     I was actually out for this one, but we only really covered chapter 9.
 * [meetup7](meetup7.md): Apr 30, 2018. Chapters 10 & 12 - Folding lists & Signaling adversity
     We mostly focused on chapter 10, so will probably come back to chapter 12.
+* [meetup8](meetup8.md): May 14, 2018. Chapter 11 - Algebraic datatypes.
 
 Some of the meetups have also inspired some exploratory code contributions to this
 repository, and they are tracked in the [topics](../topics) folder.
