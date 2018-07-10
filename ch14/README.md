@@ -118,8 +118,14 @@ of `CoArbitrary` for free (maybe `Arbitrary` too?) (with the `DeriveGeneric` pra
 
 ##### [Using QuickCheck](chEx-useQC.hs)
 
+I sort of lost interest in the exercises in this chapter :-/
+
 
 ### Meetup topic seeds
 
 1. Development environment? atom? vim?
 2. Quick way to `QuickCheck` that two functions are the same? `quickCheck (\x -> f x == g x)`
+3. Answers for "Using QuickCheck" section of chapter exercises?
+4. How to generate non-zero values for quot/rem chapter exercise?
+5. Can you write `reverseIsId x = (reverse . reverse) x == id x` pointfree?
+
