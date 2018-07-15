@@ -131,6 +131,8 @@ you'd guess.
 Anyway, the point of this section is to use `QuickCheck` to validate the laws of your algebra,
 for your instances.
 
+##### Exercise: [Maybe Another Monoid](s12_mam.hs)
+
 #### 15.13 Semigroup
 
 A _semigroup_ is like a monoid, it just doesn't have an identity (so it's just an associative operator).

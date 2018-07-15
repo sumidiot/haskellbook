@@ -23,3 +23,4 @@ madlibbinBetter' e adv noun adj =
            noun, " and drove off with his ",
            adj, " wife."]
 
+-- not sure why the Better version is better
