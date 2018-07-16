@@ -42,7 +42,7 @@ and identity. `class Monoid m` requires
 * `mappend :: m -> m -> m` (the binary operator)
 * `mconcat :: [m] -> m ; mconcat = foldr mappend mempty` (a convenience)
 
-#### 15.5 Exampleis of using Monoid
+#### 15.5 Examples of using Monoid
 
 **List** is a `Monoid` with concatenation and the empty list.
 

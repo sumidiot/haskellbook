@@ -10,11 +10,8 @@ newtype Mem s a = Mem { runMem :: s -> (a, s) }
 
 instance Monoid a => Monoid (Mem s a) where
   mempty = Mem (\s -> (mempty, s))
---  mappend (Mem f) (Mem g) = Mem $ \s -> (a <> a', s'')
---                            where (a, s') = g s
---                                  (a', s'') = f s'
   mappend (Mem f) (Mem g) = Mem h
-                            where h s = --(a <> a', s'')
+                            where h s = -- first `let` i've actually sorta _needed_
                                         let (a, s') = g s
                                             (a', s'') = f s'
                                         in (a <> a', s'')
