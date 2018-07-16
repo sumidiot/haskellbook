@@ -150,7 +150,26 @@ and begin with a colon.
 Sometimes, folks talk about an algebra being "strong", if it provides many operations. However,
 this puts more constraints on what types can be used in your algebra.
 
-If you remove the associativity constraint you get a _magma_. 
+If you remove the associativity constraint you get a _magma_.
+
+#### 15.15 Chapter Exercises
+
+I honestly didn't do a full and great job on these, defining all the QuickCheck stuff you should do.
+
+[Semigroup exercises](chEx-semigroup.hs)
+
+[Monoid exercises](chEx-monoid.hs)
+
+#### 15.16 Definitions
+
+A *monoid* is a set that is closed under an associative binary operation with an identity.
+*Closed* means that what you apply the operation to two elements of the set, you get another element
+of the same set.
+
+A *semigroup* is like a monoid, but doesn't require an identity element.
+
+Usually, in a Haskell context, an *algebra* is a type and operations over that type, and laws
+about those operations (e.g., associativity).
 
 ### Meetup topic seeds
 
@@ -163,3 +182,7 @@ If you remove the associativity constraint you get a _magma_.
     and then calling `mconcat`.
 3. Other examples of semigroup that aren't monoid?
 4. Example of a magma that isn't a semigroup?
+5. Showing `T a` is a semigroup seems to break into two cases: rely on `a` to have the structure, or don't.
+    Are there different implications about (or names/adjectives for) `T` in the two cases?
+6. What would the result of `print $ runMem (f' <> f') 0` be, in monoid exercise 8 (p. 953 in my edition)?
+
