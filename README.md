@@ -22,4 +22,6 @@ Chapters:
 11. [Chapter 11](ch11): Algebraic datatypes
 12. [Chapter 12](ch12): Signaling adversity
 13. [Chapter 13](ch13): Building projects
+14. [Chapter 14](ch14): Testing
+15. [Chapter 15](ch15): Monoid, Semigroup
 
