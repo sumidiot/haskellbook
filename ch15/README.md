@@ -185,4 +185,5 @@ about those operations (e.g., associativity).
 5. Showing `T a` is a semigroup seems to break into two cases: rely on `a` to have the structure, or don't.
     Are there different implications about (or names/adjectives for) `T` in the two cases?
 6. What would the result of `print $ runMem (f' <> f') 0` be, in monoid exercise 8 (p. 953 in my edition)?
+7. [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia#Monoid), useful in general.
 
