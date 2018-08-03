@@ -81,5 +81,38 @@ consider it part of the structure, and so can't mess with it while defining `fma
 
 #### 16.7 Commonly used functors
 
+`Maybe a`, `[a]`, and `(b,a)` are all functors (the final being a functor that ignores
+the first element of the tuple).
+
+`b -> a` is a functor. Given a map `a -> c`, `fmap (aToC) (bToA)` composes the maps.
+
+##### The functors are stacked and that's a fact
+
+Given type `List[Maybe[String]]`, which is `List[Maybe[List[Char]]]`, we note that `fmap` can be
+composed with itself to reach into any given level of the nesting. `(fmap . fmap) f l` will leave
+a `List` of `Maybes`, where the inner type will be the result type of `f`.
+
+##### Exercises: Heavy Lifting
+
+1. `a = (+1) <$> read "[1]" :: [Int]`
+2. `b = (fmap . fmap) (++ "lol") (Just ["Hi,", "Hello"])`
+3. `c = (*2) <$> (\x -> x - 2)`
+4. `d = ((return '1' ++) . show) <$> (\x -> [x, 1..3])`
+5. [needed newlines](s16_7.hs)
+
 ### Meetup topic seeds
 
+1. The function functor... `F(a) = Hom(a, a)` is the functor, I guess? `fmap f h = f . h`,
+    where `h` is the `F(a)` (`f a`) of the functor. Note that actually, `F_b(a) = Hom(b, a)`
+    is a functor of `a` for any `b` (you could post-compose a function out of `a` to any
+    function that ends in `a`).
+2. What does `fmap . fmap` mean (p. 991)? `fmap :: (a -> b) -> f a -> f b`. The book applies it to
+    an `a -> b` and a `f (g a)` where `f` and `g` are both functors. So `(fmap . fmap)` must
+    have type `(a -> b) -> f (g a) -> f (g b)`. Note that `(.)` has type `(b -> c) -> (a -> b) -> (a -> c)`.
+    Re-writing slightly, `fmap :: (a -> b) -> (f a -> f b)`, so to compose that with another copy
+    means `(a -> b) -> (f a -> f b)` composed with a thing that must then be of shape
+    `(f a -> f b) -> (g (f a) -> g (f b))`, because the `a` of the second `fmap` is actually `f a` of
+    the first, and the `b` of the second `fmap` is the `f b` of the first, and `fmap`'s second argument
+    (or final two, depending on how much you curry) are functor-wrapped, we use `g` because `f` is taken.
+    That's a decent amount for the compiler to put together! Ah, the book actually encourages walking
+    through this a few pages later (p. 995).
