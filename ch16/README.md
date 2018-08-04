@@ -100,6 +100,67 @@ a `List` of `Maybes`, where the inner type will be the result type of `f`.
 4. `d = ((return '1' ++) . show) <$> (\x -> [x, 1..3])`
 5. [needed newlines](s16_7.hs)
 
+#### 16.8 Transforming the unapplied type argument
+
+Both the product and sum types, `(,)` and `Either`, are of kind `* -> * -> *`, and `Functor` needs
+its `f` to have kind `* -> *`. However, you can partially apply a type constructor, so something like
+`(,) Int`, or `Either Int`.
+
+So, `(a,-)` has a perfectly good kind to be a functor. To actually implement the typeclass, though,
+you can't mess with the `a`, because it's part of the `f` of the `Functor`, you can only mess with
+the empty part, the `-` in this notation. The same thing happens with `Either`. In both cases,
+the functor implementation is "functorial" in the second argument.
+
+#### 16.9 QuickChecking Functor instances
+
+`QuickCheck` provides the `Test.QuickCheck.Function` module for generating functions, with the
+`CoArbitrary` typeclass. The `Fun` type has two type parameters, `Fun a b`, and the first is a
+clever `QuickCheck` specific function, and the second is a normal function, so it's enough for now
+to pattern match and just keep the second one, the generated function.
+
+#### 16.10 [Exercises: Instances of Func](s16_10.hs)
+
+#### 16.11 Ignoring Possibilities
+
+`Maybe` and `Either` are typical for error and failure cases, and the functor implementation for them
+works well with this, ignoring the failure case and just `fmap`ing the useful case.
+
+In the `Maybe` case, the following pattern:
+    ```
+    f :: a -> b
+    mf :: Maybe a -> Maybe b
+    mf (Just a) = Just (f a)  -- just apply a function on the inside of the Just case
+    mf Nothing  = Nothing     -- can't do anything in the Nothing case
+    ```
+is exactly captured by the functor implementation of `Maybe`, `mf = fmap f`.
+
+This is somewhat generic, `fmap f` being a useful thing to do, to take a function `a -> b`,
+and make a function `f a -> f b`. This is frequently called "lifting" the function.
+
+##### Either - Short Exercise
+
+1.
+```
+applyIfSecond f (Second b) = Second $ f b
+applyIfSecond f fa@(First a) = fa
+```
+2. Intuitively, you can construct a functor instance that operates over `Left` in `Either`,
+    it just leaves the `Right` "branch" alone. Roughly `Functor (flip Either)`.
+
+#### 16.11 A somewhat surprising functor
+
+There's a datatype called `Const` or `Constant` (depending on the library). There's also the
+`const` function,` a -> b -> a`, which always returns the first argument. The datatype is
+basically defined as
+`newtype Constant a b = Constant { getConstant :: a }`.
+This has kind `* -> * -> *`, so partially applying it, `Constant a` is a thing that can be
+a functor. It's implementation is a little surprising, in that `fmap f x@(Constant a) = x`,
+the `f` is basically entirely ignored, because it has nothing it can apply to.
+
+#### 16.13 More structure, more functors
+
+
+
 ### Meetup topic seeds
 
 1. The function functor... `F(a) = Hom(a, a)` is the functor, I guess? `fmap f h = f . h`,
@@ -116,3 +177,8 @@ a `List` of `Maybes`, where the inner type will be the result type of `f`.
     (or final two, depending on how much you curry) are functor-wrapped, we use `g` because `f` is taken.
     That's a decent amount for the compiler to put together! Ah, the book actually encourages walking
     through this a few pages later (p. 995).
+3. Any compiler / runtime hit for "point-free" style? I think there's a thing about Haskell being hard
+    to read because the compiler can do so much for you, as you iterate on a block of code it shrinks
+    down, but involves more "magic". So you'd be right to balance that by writing more comments, maybe
+    even showing a different / fuller implementation in comments. At that point, what's saved? If you're
+    duplicating code into comments, you've introduced the issue of keeping them aligned.
