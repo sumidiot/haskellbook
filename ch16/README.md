@@ -159,7 +159,65 @@ the `f` is basically entirely ignored, because it has nothing it can apply to.
 
 #### 16.13 More structure, more functors
 
+Sometimes a type argument must be a functor for the type to be a functor. The example in the
+book is `data Wrap f a = Wrap (f a)`, with implementation `fmap f (Wrap fa) = Wrap (fmap f fa)`,
+where the right-hand `fmap` is only available because `instance Functor f => Functor (Wrap f)`.
+This example seems a little unmotivated, if I'm honest.
 
+#### 16.14 IO Functor
+
+We've seen `IO` before, and will go into more detail later. It's an abstract datatype, with no
+data constructors to pattern match on, so the typeclasses it provides are the only way to work
+with values of type `IO a`. One of those typeclasses is `Functor`. An example usage is something
+like `fmap read getLine` to create an `IO a` (tell it the `a` you want, like `Int`).
+
+The `do` syntax provides another way to `fmap`. For example `fmap ("hi" ++) getLine` is the
+same as
+```
+do
+  input <- getLine
+  return ("hi" ++ input)
+```
+
+#### 16.15 What if we want to do something different?
+
+If you want to change the structure, but leave the type argument alone (where a functor does
+the opposite), what you want is a **natural transformation**. It would look like
+`nat :: (f -> g) -> f a -> g a`, where `f` and `g` are functors, so the first map is
+ignoring the type argument of the functor, and just changing the structure. Unfortunately,
+this type signature is invalid, because we can't have higher-kinded types as argument types
+to the function type (i.e., can't expect `f -> g` when `f` and `g` have kind `* -> *`).
+
+Instead, we do
+```
+{-# LANGUAGE RankNTypes #-}
+type Nat f g = forall a . f a -> g a
+```
+The `forall` here means that theh `f a -> g a` can't know anything about the `a`, so basically
+has to ignore it.
+
+A good example is the natural transformation `Maybe` to `[]`, given by
+```
+mtl :: Nat Maybe []
+mtl Nothing = []
+mtl (Just a) = [a]
+```
+Since the `a` is not transformed in the final line, things are ok, but if we had tried to
+transform it, we wouldn't have a natural transformation.
+
+We'll see more about natural transformations later.
+
+#### 16.16 Functors are unique to a datatype
+
+In the `Monoid` chapter, we saw that you can have multiple monoidal structures for a type,
+though you have to introduce `newtype`s because you can only have one implementation of a
+typeclass per type. A `Functor` instance will always be unique for a datatype, becuase of
+the standard "one implementation", but also more-so because of the parametricity (only allowed
+to change the contents, not the structure), and because you can't put a type placeholder
+in, like in `Either - b` as a functor of the first argument.
+
+In fact, you can create `newtype Flip f a b = Flip (f b a)`, with `{-# LANGUAGE FlexibleInstances #-}`,
+and then provide an `instance Functor (Flip Tuple a)`.
 
 ### Meetup topic seeds
 
@@ -182,3 +240,5 @@ the `f` is basically entirely ignored, because it has nothing it can apply to.
     down, but involves more "magic". So you'd be right to balance that by writing more comments, maybe
     even showing a different / fuller implementation in comments. At that point, what's saved? If you're
     duplicating code into comments, you've introduced the issue of keeping them aligned.
+4. Better example for section 16.13?
+5. What's the rank of a type? How's it different from a kind?
