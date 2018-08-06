@@ -219,6 +219,26 @@ in, like in `Either - b` as a functor of the first argument.
 In fact, you can create `newtype Flip f a b = Flip (f b a)`, with `{-# LANGUAGE FlexibleInstances #-}`,
 and then provide an `instance Functor (Flip Tuple a)`.
 
+#### 16.17 Chapter Exercises
+
+[Valid instances](chEx1.hs)
+
+[Working instances](chEx2.hs)
+
+[More instances](chEx3.hs)
+
+#### 16.18 Definitions
+
+1. _Higher-kinded polymorphism_ is where one of the types has a higher kind, like `Functor`, taking
+    a thing of kind `* -> *`.
+2. _Functor_ is a mapping between categories, manifesting itself in Haskell as a typeclass that maps
+    `a -> b` to `f a -> f b`. While there's a useful intuition naboutu functors being containers, not
+    all functors fit that intuition well (e.g., function types).
+3. We talk aboutu _lifting_, meaning applying a function in a context, or over some layer of structure.
+    The function that you're lifting "hops over" the layer of structure, leaving it alone, and only
+    applies to what's inside.
+
+
 ### Meetup topic seeds
 
 1. The function functor... `F(a) = Hom(a, a)` is the functor, I guess? `fmap f h = f . h`,
@@ -242,3 +262,5 @@ and then provide an `instance Functor (Flip Tuple a)`.
     duplicating code into comments, you've introduced the issue of keeping them aligned.
 4. Better example for section 16.13?
 5. What's the rank of a type? How's it different from a kind?
+6. Chapter exercise 2, of the third set, defining instances for `data K a b = K a`, you can't do
+    `fmap _ ka@(K a) = ka
