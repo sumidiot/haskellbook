@@ -24,4 +24,5 @@ Chapters:
 13. [Chapter 13](ch13): Building projects
 14. [Chapter 14](ch14): Testing
 15. [Chapter 15](ch15): Monoid, Semigroup
+16. [Chapter 16](ch16): Functor
 
