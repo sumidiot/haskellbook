@@ -126,12 +126,14 @@ to pattern match and just keep the second one, the generated function.
 works well with this, ignoring the failure case and just `fmap`ing the useful case.
 
 In the `Maybe` case, the following pattern:
+
     ```
     f :: a -> b
     mf :: Maybe a -> Maybe b
     mf (Just a) = Just (f a)  -- just apply a function on the inside of the Just case
     mf Nothing  = Nothing     -- can't do anything in the Nothing case
     ```
+
 is exactly captured by the functor implementation of `Maybe`, `mf = fmap f`.
 
 This is somewhat generic, `fmap f` being a useful thing to do, to take a function `a -> b`,
@@ -232,9 +234,9 @@ and then provide an `instance Functor (Flip Tuple a)`.
 1. _Higher-kinded polymorphism_ is where one of the types has a higher kind, like `Functor`, taking
     a thing of kind `* -> *`.
 2. _Functor_ is a mapping between categories, manifesting itself in Haskell as a typeclass that maps
-    `a -> b` to `f a -> f b`. While there's a useful intuition naboutu functors being containers, not
+    `a -> b` to `f a -> f b`. While there's a useful intuition about functors being containers, not
     all functors fit that intuition well (e.g., function types).
-3. We talk aboutu _lifting_, meaning applying a function in a context, or over some layer of structure.
+3. We talk about _lifting_, meaning applying a function in a context, or over some layer of structure.
     The function that you're lifting "hops over" the layer of structure, leaving it alone, and only
     applies to what's inside.
 
