@@ -113,6 +113,61 @@ The `Identity` type can help wrap things in an extra layer. For example, `const 
 `Constant` seems, at first, like `Identity`, some weird thing you wouldn't use, but it does come up.
 like `const`, it ignores one of its arguments.
 
+##### Maybe
+
+Data validation seems to be a standard use case for `Applicative`. Suppose that `data Person = Person Name Address`,
+and you have constructors `mn :: String -> Maybe Name` and `ma :: String -> Maybe Address`. Given two strings,
+you'd like to make the `Maybe Name` and `Maybe Address` and then finally a `Maybe Person`. You can
+`fmap Person $ mn n`, sort of partially applying the `Person` to the `Maybe Name`. This produces a
+`Maybe (Address -> Person)`, and to combine this with `Maybe Address`, you need `Applicative`. With
+infix operators, this chain looks like: `Person <$> mn "name" <*> ma "addy"`, and it's easy to add
+more constructor arguments as desired. Note, again, that `f <$> a <*> b` is the same as `liftA2 f a b`,
+specializing in this example to `f = Person :: Name -> Address -> Person`, `a = mn "name" :: Maybe Name`,
+and `b = ma "addy" :: Maybe Address`.
+
+A more imperative way to write some of this would involve deeply nesting if-statements, basically.
+At each layer you match one more test (e.g., "is the `Name` a `Just`?"), and if it passes you indent
+and move on to the next layer. The more layers, the deeper the indentation. With `Applicative`,
+it stays looking linear, `f <$> a <*> b`.
+
+###### Exercise: Fixer Upper
+
+1. Add `pure` before `"World"`: `const <$> Just "Hello" <*> pure "World"`
+2. `(,,,) <$> Just 90 <*> Just 10 <*> Just "Tierness" <*> pure [1,2,3]`
+
+#### 17.6 Applicative laws
+
+1. Identity: `pure id <*> v = v`
+2. Composition: `pure (.) <*> u <*> v <*> w = u <*> (v <*> w)`
+3. Homomorphism: `pure f <*> pure x = pure (f x)`
+4. Interchange: `u <*> pure y = pure ($ y) <*> u`
+
+#### 17.7 You knew this was coming
+
+There's a library called [checkers](http://hackage.haskell.org/package/checkers) to help test that
+a type satisfies the laws of common structures, like monoid and applicative. If you have an
+`Arbitrary a`, for your type `a`, and a claimed `Monoid a`, you can `quickBatch (monoid (undefined :: a))`,
+and it will test the monoid properties for your type. Note that `monoid :: a -> TestBatch`, and
+the library doesn't use the instance you pass, just uses the type to find the `Arbitrary` instance -
+that's why we can pass an `undefined` in there, as long as we tell it the type (you could also pass
+any given example value of your type). A minor gotcha is that you also have to provide an instance
+of `EqProp` for your type, but if you derive `Eq` you can do `instance EqProp MyType where (=-=) = eq`.
+
+`checkers` has tests for both `monoid` and `applicative`.
+
+#### 17.8 ZipList Monoid
+
+The default monoid of lists in the GHC `Prelude` is concatenation, but there are other structures.
+In particular, `ZipList` assumes a monoidal structure of the elements, and "zips" two lists together,
+applying the monoidal operation to each element pair in turn, similar to `zipWith`. Note that
+`ZipList` comes with the `Control.Applicative` module.
+
+##### [List Applicative Exercise](s17_8-list.hs)
+
 ### Meetup topic seeds
 
-1. Struggled with exercise 4 in "Lookups" section of 17.5, p.1077 in my book.
+1. Struggled with exercise 4 in "Lookups" section of 17.5, p.1077 in my book. Probably the thing I
+    want to write is an `mconcat`...
+2. The `checkers` library seems incredibly useful
+3. [Applicatives for validation (scala)](http://blog.leifbattermann.de/2018/03/10/how-to-use-applicatives-for-validation-in-scala-and-save-much-work/)
+4. Example of functor that isn't applicative? Maybe binary tree?
