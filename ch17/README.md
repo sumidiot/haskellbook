@@ -164,6 +164,20 @@ applying the monoidal operation to each element pair in turn, similar to `zipWit
 
 ##### [List Applicative Exercise](s17_8-list.hs)
 
+##### [ZipList Applicative Exercise](s17_8-zlist.hs)
+
+##### Either and Validation Applicative
+
+Unlike `Functor`, since you can have multiple monoid structures, you can have multiple applicative
+structures. The default `Either` instance combines `Right`s if both sides are `Right`, but if
+either side is `Left` it takes the first.
+
+There's an alternative to `Either` called `Validation`, which is defined as
+`data Validation err a = Failure err | Success a`. Note that this is isomorphic to `Either`.
+However, its `Applicative` instance is different, in that it uses a `Monoid` instance for the
+`err` to combine multiple errors if they exist. So `Validation` preserves all failures
+(e.g., typically `err` is a `[]`), while `Either` takes the first.
+
 ### Meetup topic seeds
 
 1. Struggled with exercise 4 in "Lookups" section of 17.5, p.1077 in my book. Probably the thing I
@@ -171,3 +185,9 @@ applying the monoidal operation to each element pair in turn, similar to `zipWit
 2. The `checkers` library seems incredibly useful
 3. [Applicatives for validation (scala)](http://blog.leifbattermann.de/2018/03/10/how-to-use-applicatives-for-validation-in-scala-and-save-much-work/)
 4. Example of functor that isn't applicative? Maybe binary tree?
+5. Typo in examples on p. 1129, use of `ZipList'`? the `let z` and `let z'` lines fail for me, because
+    you're passing a `[]` not a `List`?
+6. My `ZipList'` zip function, and so applicative instance, seem like what they're asking for, but
+    violate the laws. What'd I do wrong? I guess the sizes of the lists have to match, or you get things
+    like `pure id <*> (ZipList' $ Cons 1 (Cons 2 Nil))` only applying to the first element, so
+    returning `ZipList' $ Cons 1 Nil`, which isn't what you started with.
