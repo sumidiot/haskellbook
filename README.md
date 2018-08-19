@@ -25,4 +25,5 @@ Chapters:
 14. [Chapter 14](ch14): Testing
 15. [Chapter 15](ch15): Monoid, Semigroup
 16. [Chapter 16](ch16): Functor
+17. [Chapter 17](ch17): Applicative
 

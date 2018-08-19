@@ -43,6 +43,12 @@ y4 = lookup 2 $ zip xs ys
 -- the book is clearly suggesting (,) as the Foldable for sum, though it's a silly foldable (takes the second)
 --
 -- really not sure what's going on here
+--
+-- a way to do something reasonable is
+--   convert the Integers to Sum, to specify that monoid on Int
+--   mconcat the [Maybe Sum], which will create Maybe Sum of all the Justs
+--   extract the Sum back out as an Int (fmap getsum)
+-- getSum <$> (mconcat $ (fmap . fmap) Sum [x4, y4])
 
 
 

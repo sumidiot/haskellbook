@@ -178,10 +178,18 @@ However, its `Applicative` instance is different, in that it uses a `Monoid` ins
 `err` to combine multiple errors if they exist. So `Validation` preserves all failures
 (e.g., typically `err` is a `[]`), while `Either` takes the first.
 
+#### 17.9 Chapter Exercises
+
+[Specialized types](chEx-specTypes.hs)
+
+[Instances](chEx-instances.hS)
+
+[Combinations](chEx-combos.hs). Compare [fold-based solution](/ch10/chEx.hs#L10)
+
 ### Meetup topic seeds
 
-1. Struggled with exercise 4 in "Lookups" section of 17.5, p.1077 in my book. Probably the thing I
-    want to write is an `mconcat`...
+1. Struggled with exercise 4 in "Lookups" section of 17.5, p.1077 in my book, couldn't quite
+    figure out what the intended answer was, but came up with some options I guess.
 2. The `checkers` library seems incredibly useful
 3. [Applicatives for validation (scala)](http://blog.leifbattermann.de/2018/03/10/how-to-use-applicatives-for-validation-in-scala-and-save-much-work/)
 4. Example of functor that isn't applicative? Maybe binary tree?
