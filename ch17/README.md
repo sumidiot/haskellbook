@@ -199,3 +199,5 @@ However, its `Applicative` instance is different, in that it uses a `Monoid` ins
     violate the laws. What'd I do wrong? I guess the sizes of the lists have to match, or you get things
     like `pure id <*> (ZipList' $ Cons 1 (Cons 2 Nil))` only applying to the first element, so
     returning `ZipList' $ Cons 1 Nil`, which isn't what you started with.
+7. Follow-up resources look interesting, anybody read any of them?
+
