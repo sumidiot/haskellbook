@@ -51,7 +51,7 @@ collapse that list of lists to a single list, via concatenation.
 
 In `<*>`, we have an `f (a -> b)` and an `f a`, and need an `f b`. Separating the structure
 from the contents, this looks roughly like `f -> f -> f` and `(a -> b) -> a -> b`. The later
-is function application, and the former is a monoidal `mappend`, `|*|`.
+is function application, and the former is a monoidal `mappend`, `<>`.
 
 I sort of showed an example of `[]` being `Applicative` above.
 
@@ -182,7 +182,7 @@ However, its `Applicative` instance is different, in that it uses a `Monoid` ins
 
 [Specialized types](chEx-specTypes.hs)
 
-[Instances](chEx-instances.hS)
+[Instances](chEx-instances.hs)
 
 [Combinations](chEx-combos.hs). Compare [fold-based solution](/ch10/chEx.hs#L10)
 
@@ -200,4 +200,5 @@ However, its `Applicative` instance is different, in that it uses a `Monoid` ins
     like `pure id <*> (ZipList' $ Cons 1 (Cons 2 Nil))` only applying to the first element, so
     returning `ZipList' $ Cons 1 Nil`, which isn't what you started with.
 7. Follow-up resources look interesting, anybody read any of them?
+8. Would love to see a list of all the brief infix operators. `$`, `<$>`, `<>`, `<*>`, `(,)`, `->`, ...
 
