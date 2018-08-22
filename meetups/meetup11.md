@@ -56,4 +56,5 @@ and I had just gotten the answer wrong. The action is zipping, the interesting t
 I hadn't pieced together from the reading, despite the section for it, was that the `pure`
 wasn't the empty list, as in the case of `[]`. Vivek pointed out that "applicative" means
 "unital monoidal functor", where the "unit" natural transformation `id->F` gives you the `pure`.
-
+We found my mistaked on Jon's suggestion to
+[view source](http://hackage.haskell.org/package/base-4.11.1.0/docs/src/Control.Applicative.html#line-120) from hackage.
