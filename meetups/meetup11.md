@@ -3,7 +3,7 @@
 August 20, 2018
 
 Attendees: 4
-Current Members: 47 (3 new!). RSVPed: 4
+Current Members: 47 (0 new). RSVPed: 4
 
 ### Discussions
 
