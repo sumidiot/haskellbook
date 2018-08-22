@@ -64,8 +64,11 @@ zip' Nil _ = Nil
 zip' _ Nil = Nil
 zip' (Cons f fs) (Cons a as) = Cons (f a) (zip' fs as)
 
+repeat' :: a -> List a
+repeat' a = Cons a (repeat' a)
+
 instance Applicative ZipList' where
-  pure a = ZipList' (Cons a Nil)
+  pure a = ZipList' $ repeat' a
   (<*>) _ (ZipList' Nil) = ZipList' Nil
   (<*>) (ZipList' Nil) _ = ZipList' Nil
   (<*>) (ZipList' (Cons f fs)) (ZipList' (Cons a as)) = ZipList' $ Cons (f a) (zip' fs as) 
