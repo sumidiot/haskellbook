@@ -192,13 +192,15 @@ However, its `Applicative` instance is different, in that it uses a `Monoid` ins
     figure out what the intended answer was, but came up with some options I guess.
 2. The `checkers` library seems incredibly useful
 3. [Applicatives for validation (scala)](http://blog.leifbattermann.de/2018/03/10/how-to-use-applicatives-for-validation-in-scala-and-save-much-work/)
-4. Example of functor that isn't applicative? Maybe binary tree?
+4. Example of functor that isn't applicative? Maybe binary tree? Yep! Worked through some of this
+    in the [meetup](../meetups/meetup11.md)
 5. Typo in examples on p. 1129, use of `ZipList'`? the `let z` and `let z'` lines fail for me, because
     you're passing a `[]` not a `List`?
 6. My `ZipList'` zip function, and so applicative instance, seem like what they're asking for, but
     violate the laws. What'd I do wrong? I guess the sizes of the lists have to match, or you get things
     like `pure id <*> (ZipList' $ Cons 1 (Cons 2 Nil))` only applying to the first element, so
-    returning `ZipList' $ Cons 1 Nil`, which isn't what you started with.
+    returning `ZipList' $ Cons 1 Nil`, which isn't what you started with. Ha! I got `pure` wrong!
+    See [meetup notes](../meetups/meetup11.md)
 7. Follow-up resources look interesting, anybody read any of them?
 8. Would love to see a list of all the brief infix operators. `$`, `<$>`, `<>`, `<*>`, `(,)`, `->`, ...
 

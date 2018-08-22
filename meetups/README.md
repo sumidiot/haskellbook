@@ -16,6 +16,7 @@ Notes:
 * [meetup8](meetup8.md): May 14, 2018. Chapter 11 - Algebraic datatypes.
 * [meetup9](meetup9.md): June 4, 2018. Chapters 12 & 13 - Signaling adversity & Building projects
 * [meetup10](meetup10.md): July 27, 2018: Chapter 15 - Monoid, Semigroup.
+* [meetup11](meetup11.md): August 20, 2018: Chapter 17 - Applicative (yeah, we missed Ch 16, low attendance)
 
 Some of the meetups have also inspired some exploratory code contributions to this
 repository, and they are tracked in the [topics](../topics) folder.
