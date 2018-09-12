@@ -29,7 +29,7 @@ define the `fmap` for a monad, it is given by
 You only need to define `(>>=)` for a minimally complete `Monad` instance. `return` is the
 same as `pure`.
 
-Sometimes `>>` is referred to as the sequencing operator, because it sequences to actions while
+Sometimes `>>` is referred to as the sequencing operator, because it sequences two actions while
 discarding any resulting value from the first action. We'll see examples soon in the section on
 `do` syntax. `>>` has a counterpart in `Applicative` that we skipped but will return to.
 
