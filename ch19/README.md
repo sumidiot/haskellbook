@@ -100,7 +100,8 @@ an address, and returning a handle so you can read and write from/to it.
 
 ##### Binding over failure in initialization
 
-[`Seraph`]() is a process monitor, has a `main`, which is an outermost `IO`. However, it uses
+[`Seraph`](https://github.com/MichaelXavier/Seraph) is a process monitor, has a `main`,
+which is an outermost `IO`. However, it uses
 `Either` (specifically a monad transformer `EitherT`) to bind over the possibility of failure
 in constructing an initialization function, which might happen if a configuration is invalid.
 We'll return to monad transformers in a later chapter.
@@ -123,4 +124,4 @@ to a specific type with `::`. For example, `(fromInteger (1 :: Integer)) :: Int`
     and what might we compare it to, to evaluate cleanliness and readability?
 2. The `R.defaultConnectInfo` bit of the url shortener app leaves a little to be desired. What's
     a good way to inject config into my app? Same goes for the server port.
-
+3. Even better, what if I wanted to make the backend configurable, maybe not use Redis?
