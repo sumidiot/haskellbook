@@ -27,4 +27,5 @@ Chapters:
 16. [Chapter 16](ch16): Functor
 17. [Chapter 17](ch17): Applicative
 18. [Chapter 18](ch18): Monad
+19. [Chapter 19](ch19): Applying structure
 
