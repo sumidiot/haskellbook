@@ -74,5 +74,60 @@ or `fmap`.
 
 #### 21.6 Morse code revisited
 
+`Data.Maybe` provides a nice utility, `fromMaybe :: a -> Maybe a -> a`.
+
+`Data.Traversable` provides a method `sequence :: (Traversable t, Monad m) => t (m a) -> m (t a)`,
+equivalent to the `sequenceA` of the `Traversable t` instance.
+
+`traverse` is just `fmap` followed by `sequence`, similar to how `>>=` is just `fmap` followed by `join`.
+
+#### 21.7 Axing tedious code
+
+#### 21.8 Do all the things
+
+[`wreq`](http://hackage.haskell.org/package/wreq) is an HTTP client library.
+[httpbin.org](http://httpbin.org/) is a website that is handy for testing HTTP clients.
+
+It is possible to import a module and ignore some exports, e.g., via `import A hiding (f)`.
+
+The `wget` library has a `get` method, and so we could `map get urls` to get a `[IO (Response ByteString)]`,
+but instead of having a bunch of `IO` actions we can perform, we might prefer one large `IO` with a list
+of responses, which is exactly what `traverse` does for us.
+
+##### Strength for understanding
+
+`Traversable` is stronger than `Functor` and `Foldable`, we can derive either from a definition of
+`traverse` or `sequence`. Using `Identity`, with `Data.Functor.Identity.runIdentity :: Id a -> a`,
+we can recover something like `fmap`. Similarly, with `Data.Functor.Constant` we recover `foldMap`.
+
+#### 21.9 `Traversable` instances
+
+##### Either
+
+##### Tuple
+
+#### 21.10 `Traversable` Laws
+
+`Traversable` instances are supposed to follow a few laws:
+
+1. *Naturality*: `t . traverse f = traverse (t . f)
+2. *Identity*: `traverse Identity = Identity`
+3. *Composition*: `traverse (Compose . fmap g . f) = Compose . fmap (traverse g) . traverse f
+
+Coming from the `sequenceA` standpoint, the laws are:
+
+1. *Naturality*: `t . sequenceA = sequenceA . fmap t`
+2. *Identity*: `sequenceA . fmap Identity = Identity`
+3. *Composition*: `sequenceA . fmap Compose = Compose . fmap sequenceA . sequenceA`.
+
+#### 21.11 Quality Control
+
+You can `QuickCheck` your `Traversable` instances with `checkers`.
+
+#### 21.12 [Chapter Exercises](chEx.hs)
+
 ### Meetup topic seeds
 
+1. Example of a `Foldable` that isn't `Traversable`?
+2. My first guess of a functor for the `S` type of the chapter exercises didn't pass checkers,
+    but did compile.
