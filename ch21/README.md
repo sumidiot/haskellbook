@@ -135,4 +135,7 @@ You can `QuickCheck` your `Traversable` instances with `checkers`.
     Playing with some examples, `length` gives the number of nodes in a tree, and if your function
     produces a list of size `n`, traversing that function over a tree of length `l` gives a resulting
     list of size `n^l`. The list is giving `n` options, and `traverse` is returning all of the possible
-    ways you can apply any of those functions to each node in the tree.
+    ways you can apply any of those functions to each node in the tree. Thinking about the `sequenceA`
+    version, if I have a `Tree` of lists, the list of `Tree`s would be the list of trees made by
+    choosing one of the values at each node.
+
