@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleInstances #-}
+
 module S20_5_Exercises where
 
 import Data.Monoid -- for Sum
@@ -20,6 +22,7 @@ elem' a = getAny . foldMap (\x -> Any (x == a))
 
 
 -- exercise 5
+{-#
 data Max t = Max { getMax :: t }
 instance Ord t => Semigroup (Max t) where
   (<>) a b = Max $ max (getMax a) (getMax b)
@@ -29,11 +32,31 @@ maximum' :: (Foldable t, Ord a) => t a -> Maybe a
 maximum' as = case null as of
                 True -> Nothing
                 False -> Just $ getMax $ foldMap Max as
+#-}
 
+
+-- fixed version of the commented block above
+data Max t = Max { getMax :: t }
+instance Ord t => Semigroup (Max t) where
+  (<>) a b = Max $ max (getMax a) (getMax b)
+instance Ord t => Monoid (Max (Maybe t)) where -- this requires FlexibleInstances
+  mempty = Max Nothing
+maximum' :: (Foldable t, Ord a) => t a -> Maybe a
+maximum' = getMax . foldMap (Max . Just)
+
+
+-- trying too hard
 maximum'' :: (Foldable t, Ord a) => t a -> Maybe a
 maximum'' as = case getFirst $ foldMap (First . Just) as of
                  Nothing -> Nothing
                  Just h -> Just (foldr max h as)
+
+
+-- solution identified during meetup, with foldr
+maximum''' :: (Foldable t, Ord a) => t a -> Maybe a
+maximum''' = foldr f Nothing where
+               f a Nothing   = Just a
+               f a (Just a') = Just (max a a')
 
 
 -- exercise 6

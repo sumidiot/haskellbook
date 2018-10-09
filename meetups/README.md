@@ -18,6 +18,7 @@ Notes:
 * [meetup10](meetup10.md): July 27, 2018: Chapter 15 - Monoid, Semigroup.
 * [meetup11](meetup11.md): August 20, 2018: Chapter 17 - Applicative (yeah, we missed Ch 16, low attendance).
 * [meetup12](meetup12.md): September 24, 2018: Chapters 18 & 19 - Monad and Applying Structure.
+* [meetup13](meetup13.md): October 8, 2018: Chapters 20 & 21 - Foldable and Traversable.
 
 Some of the meetups have also inspired some exploratory code contributions to this
 repository, and they are tracked in the [topics](../topics) folder.
