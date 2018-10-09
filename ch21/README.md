@@ -131,3 +131,8 @@ You can `QuickCheck` your `Traversable` instances with `checkers`.
 1. Example of a `Foldable` that isn't `Traversable`?
 2. My first guess of a functor for the `S` type of the chapter exercises didn't pass checkers,
     but did compile.
+3. What should `traverse` mean for the `Tree` type of the chapter exercises, when `f` is `[]`?
+    Playing with some examples, `length` gives the number of nodes in a tree, and if your function
+    produces a list of size `n`, traversing that function over a tree of length `l` gives a resulting
+    list of size `n^l`. The list is giving `n` options, and `traverse` is returning all of the possible
+    ways you can apply any of those functions to each node in the tree.

@@ -52,10 +52,52 @@ instance Foldable (S n) where
   --foldMap :: Monoid m => (a -> m) -> S n a -> m
   foldMap f (S na a) = f a
 
---instance Traversable n => Traversable (S n) where
+instance Traversable n => Traversable (S n) where
   --traverse :: Applicative f => (a -> f b) -> (S n a) -> f (S n b)
-  --traverse f (S na a) = f a
+  traverse g (S na a) = liftA2 S (traverse g na) (g a)
+  -- na is an (n a), and n is traversable, so (traverse g na) is an f (n b)
+  -- (g a) is an f b
+  -- to create an S n b, I need an n b and a b, and I have those, they're just wrapped in f
+  -- but f is applicative, so I can liftA2 S, and get a map (f (n b)) -> (f b) -> f (S n b)
 
 testS = do
-  quickBatch $ functor (undefined :: S [] (Int, Int, Int)) -- fails!!
+  --quickBatch $ functor (undefined :: S [] (Int, Int, Int)) -- fails!!
   --sample' (arbitrary :: Gen (S [] Int))
+  quickBatch $ traversable (undefined :: S [] ([Int], [Int], [Int])) -- also fails!!
+
+
+
+
+data Tree a = Empty | Leaf a | Node (Tree a) a (Tree a) deriving (Eq, Show)
+
+instance Functor Tree where
+  -- fmap :: (a -> b) -> Tree a -> Tree b
+  fmap _ Empty = Empty
+  fmap f (Leaf a) = Leaf (f a)
+  fmap f (Node ta a ta') = Node (fmap f ta) (f a) (fmap f ta')
+
+instance Foldable Tree where
+  -- foldMap :: Monoid m => (a -> m) -> Tree a -> m
+  foldMap _ Empty = mempty
+  foldMap f (Leaf a) = f a
+  foldMap f (Node ta a ta') = (foldMap f ta) <> (f a) <> (foldMap f ta')
+
+instance Traversable Tree where
+  traverse g Empty = pure Empty
+  traverse g (Leaf a) = Leaf <$> g a
+  traverse g (Node l a r) = liftA3 Node (traverse g l) (g a) (traverse g r)
+
+
+instance Eq a => EqProp (Tree a) where (=-=) = eq
+instance Arbitrary a => Arbitrary (Tree a) where
+  arbitrary = do
+    a <- arbitrary
+    l <- arbitrary
+    r <- arbitrary
+    frequency [(3, return Empty), (2, return $ Leaf a), (1, return $ Node l a r)]
+
+
+testTree = do
+  quickBatch $ functor (undefined :: Tree (Int, Int, Int))
+  quickBatch $ traversable (undefined :: Tree ([Int], [Int], [Int]))
+
