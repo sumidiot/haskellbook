@@ -29,4 +29,5 @@ Chapters:
 18. [Chapter 18](ch18): Monad
 19. [Chapter 19](ch19): Applying structure
 20. [Chapter 20](ch20): Foldable
+21. [Chapter 21](ch21): Traversable
 
