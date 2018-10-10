@@ -12,6 +12,7 @@ For now, they're all just in this file.
 
 * Anonymous function: `\x -> x + 1`
 * `$` is function application, just associates to the right
+* You can partially apply an infix binary operator as a "slice" with, e.g., `(+30)`
 
 ### ghci
 
