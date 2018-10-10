@@ -7,6 +7,21 @@ For now, they're all just in this file.
 
 * `id`, the identity function
 * `div`, `quot`, `rem`, `mod`, for numeric divisors and remainders and such
+* `print :: Show a => a -> IO ()`, leaves quotes around strings `a` is `String`
+* `putStrLn :: String -> IO ()`
+* `putStr :: String -> IO ()`, like `putStrLn` without newline
+* `concat :: [[a]] -> [a]`, or more recently/generally, `Foldable t => t [a] -> [a]`
+* `head :: [a] -> a`, `tail :: [a] -> [a]`
+* `take :: Int -> [a] -> [a]`, `drop :: Int -> [a] -> [a]`
+
+### build-in operators
+
+| Operator | Context | Type                     | Purpose |
+| -------- | ------- | ------------------------ | ------- |
+| `++`     | `List`  | `[a] -> [a] -> [a]`      | Concatenate lists, recall `String` is `[Char]` |
+| `:`      | `List`  | `a -> [a] -> [a]`        | "cons", create a list |
+| `!!`     | `List`  | `[a] -> Int -> a`        | Retrieve element of list based on index |
+
 
 ### syntax
 

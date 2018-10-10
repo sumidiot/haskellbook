@@ -1,4 +1,4 @@
-## Chapter 2 Notes
+## Chapter 2: Hello, Haskell!
 
 ### My Reading Notes
 

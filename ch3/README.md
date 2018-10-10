@@ -1,4 +1,4 @@
-## Chapter 3
+## Chapter 3: Strings
 
 ### Reading Notes
 
@@ -28,7 +28,7 @@ The order of top-level declarations doesn't matter (generally).
 
 `++` concatenates, as does `concat`. `:type (++)` is `[a] -> [a] -> [a]`, while
 `:t concat` is `[[a]] -> [a]`. Since `String = [Char]`, `concat` on a list of strings
-is reasonable. (ghc 7.10+ has `:t concat` as `Foldable t => t [a]`, which is fun!)
+is reasonable. (ghc 7.10+ has `:t concat` as `Foldable t => t [a] -> [a]`, which is fun!)
 
 The type `[a]` means a list with elements of some type `a` we do not yet know.
 

@@ -1,4 +1,4 @@
-## Chapter 1
+## Chapter 1: All you Need is Lambda
 
 ### My Reading Notes
 
