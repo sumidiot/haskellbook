@@ -30,6 +30,7 @@ For now, they're all just in this file.
 ### Additional useful functions
 
 * `Data.List.nub` removes duplicates from a list
+* `Data.List.intersperse` puts a value between all values in a list. e.g., `intersperse ' ' "word" == "w o r d"`.
 
 ### Prelude operators
 
@@ -103,6 +104,12 @@ For now, they're all just in this file.
     f :: (Int, Int) -> ((Int, Int), Int)
     f p@(a,b) -> (p, a+b)
     ```
+* `module M (e1, e2, ...) where` defines a module that exports the symbols `ei`. It occurs at the top
+    of a file
+* `import M`, `import qualified M`, and `import qualified M as N` import a module. In the first case
+    you can refer to its exports directly. In the second, you must prefix them with `M.` (but is handy
+    if there are name collisions). In the third, you prefix them with `N.`, which is handy if `M` is
+    a long string.
 
 
 ### ghci
@@ -125,6 +132,7 @@ You can enter just the first letter of a command if it is not ambiguous
 * `:type` and `:kind` -- show... type... and kind
 * `:info` -- type information for function (including infix, associativity, precedence) and type
 * `:kind` shows the kind of a type
+* `:browse` lets you see the functions of a module
 
 #### Pragmas
 
@@ -133,3 +141,11 @@ Compiler extensions, added at the top of a source with with `{-# LANGUAGE Pragma
 
 * `GeneralizedNewtypeDeriving`, allows you to add `deriving T` to a `newtype` declaration to automatically
     derive that the `newtype` is in the `T` typeclass, as long as the wrapped type is.
+
+
+### stack
+
+* `stack new (name) simple` will create a new simple template project called `name`
+* `stack build` builds a project
+* `stack ghci` gives you a ghci REPL with your project in scope (it's `Main` anyway)
+* `stack exec` runs the `Main` executable of your project
