@@ -30,7 +30,12 @@ For now, they're all just in this file.
 ### Additional useful functions
 
 * `Data.List.nub` removes duplicates from a list
-* `Data.List.intersperse` puts a value between all values in a list. e.g., `intersperse ' ' "word" == "w o r d"`.
+* `Data.List.intersperse` puts a value between all values in a list. e.g., `intersperse ' ' "word" == "w o r d"`
+* `Data.Map.fromList` creates a key-value map from a list of pairs
+* `Data.Map.lookup :: Ord k => v -> Map k v -> Maybe v`
+* `Data.Map.foldWithKey :: Ord k => (k -> a -> b -> b) -> b -> Map k a -> b`
+* `Data.Map.insert :: Ord k => k -> v -> Map k v -> Map k v`
+* `Data.Map.empty :: Ord k => Map k v`
 
 ### Prelude operators
 
@@ -148,4 +153,7 @@ Compiler extensions, added at the top of a source with with `{-# LANGUAGE Pragma
 * `stack new (name) simple` will create a new simple template project called `name`
 * `stack build` builds a project
 * `stack ghci` gives you a ghci REPL with your project in scope (it's `Main` anyway)
+* `stack ghci --package X` includes the package in your REPL. Common ones, for this book anyway,
+    are `QuickCheck` and `checkers`
 * `stack exec` runs the `Main` executable of your project
+* `stack exec which project-name` shows you the path of the executable
