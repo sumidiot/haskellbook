@@ -3,7 +3,7 @@
 This directory contains some cheatsheets for useful functions and typeclasses and things.
 For now, they're all just in this file.
 
-### built-in functions
+### Prelude functions
 
 * `id`, the identity function
 * `div`, `quot`, `rem`, `mod`, for numeric divisors and remainders and such
@@ -27,8 +27,11 @@ For now, they're all just in this file.
 * `foldl :: (b -> a -> b) -> b -> [a] -> b`
 * `scanr` and `scanl` are like `foldr` and `foldl` except return `[b]`, the list of intermediate results
 
+### Additional useful functions
 
-### build-in operators
+* `Data.List.nub` removes duplicates from a list
+
+### Prelude operators
 
 | Operator | Context | Type                               | Purpose |
 | -------- | ------- | ---------------------------------- | ------- |
@@ -54,6 +57,8 @@ For now, they're all just in this file.
 ### syntax
 
 * Anonymous function: `\x -> x + 1`
+* The type of a function is `A -> B`. All functions take one argument, but that may then return
+    another function, etc. `f a b c d` applies `f` to 4 arguments.
 * `$` is function application, just associates to the right
 * You can partially apply an infix binary operator as a "slice" with, e.g., `(+30)`
 * `(,)` creates a tuple, can be multiple components, not just two
@@ -63,7 +68,9 @@ For now, they're all just in this file.
 * `f :: (X) => Y` shows the type of a thing with typeclass constraints `X` and type `Y`
 * `data T p1 p2 ... = D1 q11 ... | D2 q21 ... | ...` defines a type constructor `T` with parameters
     `p1...`, and data constructors `D1...` with parameters.
-* `newtype T a = D a` defines a newtype, it like `data` but can only have one constructor and one field
+* `newtype T = D a` defines a newtype, it like `data` but can only have one constructor and one field
+* `deriving (C1,C2,...)` can be added to a `data` or `newtype` declaration for some automatic
+    typeclass derivations (normally things like `Eq`, `Show`, `Ord`).
 * `class C a where ...` defines a typeclass `C`
 * `instance C T where ...` shows how the type `T` is an instance of typeclass `C`
 * `let a=b in ...`
@@ -83,6 +90,19 @@ For now, they're all just in this file.
 * `[ expr | symb <- list]` is a list comprehension. you can do `[e | s1 <- l1, s2 <- l2 ...]` to
     combine multiple lists, or filter elements with `[e | s1 <- l1, p s1]` where `p` is a function taking
     the `s1` to a boolean
+* "Record syntax" allows you to define a type like
+    ```
+    data T = T { f1 :: A1, f2 :: A2, ... }
+    ```
+    where, in some sense, the `f`s are fields of types `A`s. This syntax gives you automatic functions
+    `fi :: T -> Ai`, which is sometimes more convenient than pattern matching an algebraic type. You
+    still construct a `T` as usual, e.g., `T f1 f2` (but if you want to change the order, or name the
+    arguments, you can: `T { f2 = f2, f1 = f1 }`)
+* "As patterns" let you match an expression but also capture the entire match. So, as a silly example,
+    ```
+    f :: (Int, Int) -> ((Int, Int), Int)
+    f p@(a,b) -> (p, a+b)
+    ```
 
 
 ### ghci
@@ -98,9 +118,18 @@ You can enter multi-line blocks with `:{` and `:}`.
 
 You can enter just the first letter of a command if it is not ambiguous
 
-* `:load <file.hs>` -- load this module, changes prompt from Prelude> to maybe *Main>
-* `:module` -- "quit" the loaded module, back to Prelude>
-* `:module *Main` -- jump back to the *Main module
+* `:load <file.hs>` -- load this module, changes prompt from `Prelude>` to maybe `*Main>`
+* `:module` -- "quit" the loaded module, back to `Prelude>`
+* `:module *Main` -- jump back to the `*Main` module
 * `:reload` -- reload current module (e.g., re-read file)
 * `:type` and `:kind` -- show... type... and kind
 * `:info` -- type information for function (including infix, associativity, precedence) and type
+* `:kind` shows the kind of a type
+
+#### Pragmas
+
+Compiler extensions, added at the top of a source with with `{-# LANGUAGE PragmaName #-}`, where
+`PragmaName` is one of the following (or many others we won't get to):
+
+* `GeneralizedNewtypeDeriving`, allows you to add `deriving T` to a `newtype` declaration to automatically
+    derive that the `newtype` is in the `T` typeclass, as long as the wrapped type is.

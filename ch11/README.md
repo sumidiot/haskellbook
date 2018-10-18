@@ -134,7 +134,7 @@ underlying type, and you can't do that for type synonyms.
 Going the other way, you might want your `newtype` to inheric typeclass instances from the
 underlying type. To do this, use the `GeneralizedNewtypeDeriving` language extension by adding
 the following "pragma" to the top of your source file: `{-# LANGUAGE GeneralizedNewtypeDeriving #-}`.
-Then, for your `newtype`, you can say `deriving T` where `T` is a typeclass for there there is
+Then, for your `newtype`, you can say `deriving T` where `T` is a typeclass for which there is
 an instance for the underlying type of the `newtype`.
 
 ##### Exercises: [Logic Goats](s11_9.hs)
