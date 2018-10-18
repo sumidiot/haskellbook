@@ -23,6 +23,9 @@ For now, they're all just in this file.
 * `filter :: (a -> Bool) -> [a] -> [a]`
 * `zip :: [a] -> [b] -> [(a, b)]` and `unzip :: [(a, b)] -> ([a], [b])`
 * `zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]`
+* `foldr :: (a -> b -> b) -> b -> [a] -> b`, in older versions of GHC, see `Foldable` below
+* `foldl :: (b -> a -> b) -> b -> [a] -> b`
+* `scanr` and `scanl` are like `foldr` and `foldl` except return `[b]`, the list of intermediate results
 
 
 ### build-in operators
