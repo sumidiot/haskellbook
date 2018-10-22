@@ -53,6 +53,29 @@ Note that this gives us a `runReader` function to extract the function.
 The `InstanceSigs` `LANGUAGE` pragma lets you specialize the type signature of a typeclass method,
 which seems helpful for debugging and actually just specifying instances.
 
+#### 22.7 The `Monad` of functions
+
+The `return` is the same as `pure`, and is just `const`. The monadic bind has type
+`(>>=) :: (r -> a) -> (a -> r -> b) -> r -> b` so is given by `(>>=) ra arb r = arb (ra r) r`,
+which looks very similar to the applicative `<*>` definition, they're very close, just some of the
+orders of the arguments are different.
+
+#### 22.8 `Reader` `Monad` by itself is boring
+
+The `Monad` for `Reader` doesn't get you anything beyond the `Applicative`, really, as we just saw
+with their implementations. You can implement the bind with `flip` and `<*>`.
+
+#### 22.9 You can change what comes below, but not above
+
+If you want to call `f :: r -> a` but have an `r'`, you have to have an `r' -> r` first.
+
+#### 22.10 You tend to see `ReaderT`, not `Reader`
+
+`Reader` is usually one monad in a stack of types. In that setup, it's usually a monad transformer,
+which is frequently indicated with `T` added to the end, so `ReaderT`.
+
+We'll see more about `ReaderT` and other monad transformers in a few chapters.
+
 ### Meetup topic seeds
 
 1. In the section 22.2 "Warming Up" exercise, the version of `tupled` written with `>>=` is interesting,
