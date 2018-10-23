@@ -76,9 +76,31 @@ which is frequently indicated with `T` added to the end, so `ReaderT`.
 
 We'll see more about `ReaderT` and other monad transformers in a few chapters.
 
+#### 22.11 Chapter Exercises
+
+##### [Warm up](chEx.hs)
+
+`fromMaybe :: a -> Maybe a -> a` takes a default value and a `Maybe` and returns the default if the
+`Maybe` is Nothing, otherwise it unpacks the `Just`.
+
+##### [Rewriting Shawty](shawty) -- didn't get this one
+
+#### 22.12 Definition
+
+A monad transformer takes a monad and returns another monad, allowing us to combine monads. It is normal
+to stack monads this way to capture the behavior of several monads in concert, and to have a type alias
+for the stack.
+
 ### Meetup topic seeds
 
 1. In the section 22.2 "Warming Up" exercise, the version of `tupled` written with `>>=` is interesting,
     I'm not sure how to write it _not_ point-free.
 2. What's the instance of `Applicative` for `Reader r`? In particular, `<*>`? How do you `checkers` it?
+3. I didn't really find the point of most of the first chapter exercise. The `liftA2` construct is
+    entertaining, but the functions that are the exercise at the end... I don't see the magic (or I did
+    them wrong?). 
+4. I'm also not really sure I understood the 'rewriting shawty' exercise.
+5. In trying to figure out the shawty exercise, I played with the [reader example](extra/readerExample.hs).
+    It didn't really sell me on the `Reader` pattern, for some reason. Maybe it was the `do` with a few
+    lines, where I've been delighted with `liftA2`s, or something.
 
