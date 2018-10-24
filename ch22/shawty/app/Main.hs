@@ -116,27 +116,15 @@ app rConn = do
       Just _ -> do -- we don't use the parsed uri, but this checks that it is well-formed
         shawty <- liftIO shortyGen -- lifting into ActionM Monad, representing code that
                                    -- processes web requests into responses
-        -- i thought it was cleaner to not do all the encode/decode here, so move the next 2 lines out
-        --let shorty = BC.pack shawty -- conversion to ByteString for Redis
-        --    uri' = encodeUtf8 (TL.toStrict uri) -- again, type conversion for Redis
         resp <- liftIO (saveURISimple rConn shawty uri) -- result of Redis interaction, liftIO converts to ActionM
         case resp of
           Left err -> text (TL.pack $ show err) -- err is R.Reply, showable
           Right sh -> html (shortyCreated resp shawty)
-        --html (shortyCreated resp shawty) -- original, before we had keyInUse
       Nothing -> text (shortyAintUri uri) -- error response if URI was invalid
   get "/:short" $ do -- path capture, "short" becomes an avaliable parameter
     short <- param "short"
     uri <- liftIO (getURISimple rConn short)
     either text html uri -- errors return as text, successful messages as html
--- the below was the original method of the book
---    case uri of
---      Left reply -> text (TL.pack (show reply)) -- some sort of failure, usually an error
---      Right mbBS -> case mbBS of
---        Nothing -> text "uri not found" -- key wasn't in Redis yet
---        Just bs -> html (shortyFound tbs)
---          where tbs :: TL.Text
---                tbs = TL.fromStrict (decodeUtf8 bs)
 
 
 main :: IO ()
