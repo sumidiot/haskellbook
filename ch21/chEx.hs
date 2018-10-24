@@ -41,16 +41,26 @@ data S n a = S (n a) a deriving (Eq, Show)
 instance (Functor n, Arbitrary (n a), Arbitrary a) => Arbitrary (S n a) where
   arbitrary = S <$> arbitrary <*> arbitrary
 
-instance (Applicative n, Testable (n Property), EqProp a) => EqProp (S n a) where
-  (S x y) =-= (S p q) = (property $ (=-=) <$> x <*> p) .&. (y =-= q)
+-- I don't know what's going on here
+--
+-- the book suggests the following instance:
+--   --instance (Applicative n, Testable (n Property), EqProp a) => EqProp (S n a) where
+--   --  (S x y) =-= (S p q) = (property $ (=-=) <$> x <*> p) .&. (y =-= q)
+-- but I can't make that work, the quickBatch calls fail
+-- the instance below is based on [dmvianna's solutions](https://github.com/dmvianna/haskellbook/blob/master/src/Ch21-Traversable.hs)
+-- happily, it makes the things work
+instance (Eq (n a), Eq a) => EqProp (S n a) where
+  (=-=) = eq
+
 
 instance Functor n => Functor (S n) where
   -- fmap :: (a -> b) -> S n a -> S n b
-  fmap f (S na a) = S (f <$> na) (f a) -- -- this compiles but fails the laws!
+  fmap f (S na a) = S (f <$> na) (f a)
 
-instance Foldable (S n) where
+-- the Foldable n bit is based on dmvianna's solution also, and makes things work
+instance Foldable n => Foldable (S n) where
   --foldMap :: Monoid m => (a -> m) -> S n a -> m
-  foldMap f (S na a) = f a
+  foldMap f (S na a) = (foldMap f na) <> f a -- just f a is an m, but fails the laws
 
 instance Traversable n => Traversable (S n) where
   --traverse :: Applicative f => (a -> f b) -> (S n a) -> f (S n b)
@@ -61,9 +71,9 @@ instance Traversable n => Traversable (S n) where
   -- but f is applicative, so I can liftA2 S, and get a map (f (n b)) -> (f b) -> f (S n b)
 
 testS = do
-  --quickBatch $ functor (undefined :: S [] (Int, Int, Int)) -- fails!!
+  quickBatch $ functor (undefined :: S Maybe (Int, Int, [Int]))
   --sample' (arbitrary :: Gen (S [] Int))
-  quickBatch $ traversable (undefined :: S [] ([Int], [Int], [Int])) -- also fails!!
+  quickBatch $ traversable (undefined :: S Maybe (Int, Int, [Int]))
 
 
 

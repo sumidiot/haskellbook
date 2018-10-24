@@ -30,4 +30,5 @@ Chapters:
 19. [Chapter 19](ch19): Applying structure
 20. [Chapter 20](ch20): Foldable
 21. [Chapter 21](ch21): Traversable
+22. [Chapter 22](ch22): Reader
 
