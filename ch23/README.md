@@ -27,5 +27,29 @@ we'll see in later chapters.
 Chaining the state to keep getting new next values can get tedious, and making it easier
 is the point of the techniques in this chapter.
 
+#### 23.4 The `State` newtype
+
+`newtype State s a = State { runState :: s -> (a, s) }`
+
+Note that this looks a lot like `random` from above.
+
+#### 23.5 Throw down
+
+`state :: Monad m => (s -> (a, s)) -> StateT s m a`
+
+[RandomExample](s5_example.hs)
+
+`evalState :: State s a -> s -> a`
+
+Recall the difference between `replicate :: a -> [a]` and `replicateM :: Monad m => Int -> m a -> m [a]`
+
+`randomIO :: Random a => IO a`
+
+##### Exercises: Roll Your Own
+
+My solutions are at the bottom of the running section [example](s5_example.hs)
+
 ### Meetup topic seeds
 
+1. Why does `liftA3 (,,) f f f`, where `f :: State StdGen Int`, not produce triples of the same `Int`?
+    This is `rollDieThreeTimes'` in section 5.
