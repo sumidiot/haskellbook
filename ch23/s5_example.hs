@@ -5,7 +5,6 @@ import Control.Applicative (liftA3)
 import Control.Monad (replicateM)
 import Control.Monad.Trans.State
 
-
 data Die = DieOne | DieTwo | DieThree | DieFour | DieFive | DieSix deriving (Eq, Show)
 
 intToDie :: Int -> Die

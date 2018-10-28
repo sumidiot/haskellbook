@@ -49,7 +49,32 @@ Recall the difference between `replicate :: a -> [a]` and `replicateM :: Monad m
 
 My solutions are at the bottom of the running section [example](s5_example.hs)
 
+#### 23.6 Write `State` for yourself
+
+[My implementations](s6_impl.hs) for `Functor`, `Applicative`, and `Monad`.
+
+#### 23.7 Get a coding job with one weird trick
+
+[Basic FizzBuzz](s7_basic.hs)
+
+[State-y](s7_state.hs)
+
+There's a difference list data type which has `O(1)` appends, in `Data.DList`.
+
+There's a `mapM_ :: (Foldable t, Monad m) => (a -> m b) -> t a -> m ()`, different from
+`mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)`. That's somewhat similar to
+`runState :: State s a -> s -> (a, s)` and `execState :: State s a -> s -> s`.
+
+It's actually uncommon to need `State`, as such, in `Haskell`.
+
+#### 23.8 Chapter Exercises
+
 ### Meetup topic seeds
 
 1. Why does `liftA3 (,,) f f f`, where `f :: State StdGen Int`, not produce triples of the same `Int`?
     This is `rollDieThreeTimes'` in section 5.
+2. If I have `[Maybe a]` and want a `Maybe [a]`, that is a `None` if everything is `None`, and otherwise a
+    `Sum` of all the things that were `Sum` (i.e., just ignore all the `None`), how do I do that?
+3. [Detailed walkthrough for a beginner Haskell program](http://www.haskellforall.com/2018/10/detailed-walkthrough-for-beginner.html)
+    just came out, it was nice. I started using the `ghcid` bit, nice to have.
+4. I didn't get the `dlist` usage worked out, couldn't figure out how to get it to load.
