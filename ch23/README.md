@@ -67,7 +67,7 @@ There's a `mapM_ :: (Foldable t, Monad m) => (a -> m b) -> t a -> m ()`, differe
 
 It's actually uncommon to need `State`, as such, in `Haskell`.
 
-#### 23.8 Chapter Exercises
+#### 23.8 [Chapter Exercises](chEx.hs)
 
 ### Meetup topic seeds
 
