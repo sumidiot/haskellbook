@@ -95,7 +95,7 @@ for the stack.
 
 1. In the section 22.2 "Warming Up" exercise, the version of `tupled` written with `>>=` is interesting,
     I'm not sure how to write it _not_ point-free.
-2. What's the instance of `Applicative` for `Reader r`? In particular, `<*>`? How do you `checkers` it?
+2. What's the instance of `Arbitrary` for `Reader r`? In particular, `<*>`? How do you `checkers` it?
 3. I didn't really find the point of most of the first chapter exercise. The `liftA2` construct is
     entertaining, but the functions that are the exercise at the end... I don't see the magic (or I did
     them wrong?). 

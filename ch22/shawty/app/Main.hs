@@ -5,6 +5,7 @@
 
 module Main where
 
+--import Control.Monad.Reader
 import Control.Monad (replicateM)
 import Control.Monad.IO.Class (liftIO)
 import qualified Data.ByteString.Char8 as BC
@@ -14,6 +15,8 @@ import qualified Database.Redis as R
 import Network.URI (URI, parseURI)
 import qualified System.Random as SR
 import Web.Scotty
+
+newtype Reader r a = Reader { runReader :: r -> a}
 
 
 alphaNum :: String
@@ -106,8 +109,9 @@ shortyFound tbs =
   TL.concat [ "<a href=\"", tbs, "\">", tbs, "</a>" ]
 
 
-app :: R.Connection -> ScottyM ()
-app rConn = do
+app :: Reader R.Connection (ScottyM ())
+--app :: R.Connection -> ScottyM ()
+app = Reader $ \rConn -> do
   get "/" $ do -- this block will shorten a uri get parameter
     uri <- param "uri"
     let parsedUri :: Maybe URI
@@ -130,4 +134,4 @@ app rConn = do
 main :: IO ()
 main = do
   rConn <- R.connect R.defaultConnectInfo -- localhost:6379
-  scotty 3000 (app rConn)
+  scotty 3000 (runReader app rConn)
