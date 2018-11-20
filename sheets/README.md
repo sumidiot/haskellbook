@@ -37,16 +37,18 @@ For now, they're all just in this file.
 * `Data.Map.insert :: Ord k => k -> v -> Map k v -> Map k v`
 * `Data.Map.empty :: Ord k => Map k v`
 
-### Prelude operators
+### Operators
 
-| Operator | Context | Type                               | Purpose |
-| -------- | ------- | ---------------------------------- | ------- |
-| `++`     | `List`  | `[a] -> [a] -> [a]`                | Concatenate lists, recall `String` is `[Char]` |
-| `:`      | `List`  | `a -> [a] -> [a]`                  | "cons", create a list                          |
-| `!!`     | `List`  | `[a] -> Int -> a`                  | Retrieve element of list based on index |
-| `==`     | `Eq`    | `a -> a -> Bool`                   | Equality checking    |
-| `/=`     | `Eq`    | `a -> a -> Bool`                   | In-equality checking |
-| `.`      | `->`    | `(b -> c) -> (a -> b) -> (a -> c)` | Function composition |
+| Operator | Context  | Type                               | Purpose |
+| -------- | -------- | ---------------------------------- | ------- |
+| `++`     | `List`   | `[a] -> [a] -> [a]`                | Concatenate lists, recall `String` is `[Char]` |
+| `:`      | `List`   | `a -> [a] -> [a]`                  | "cons", create a list                          |
+| `:|`     | `Data.List.NonEmpty` | `a -> [a] -> [a]`      | Create a non-empty list |
+| `!!`     | `List`   | `[a] -> Int -> a`                  | Retrieve element of list based on index |
+| `==`     | `Eq`     | `a -> a -> Bool`                   | Equality checking    |
+| `/=`     | `Eq`     | `a -> a -> Bool`                   | In-equality checking |
+| `.`      | `->`     | `(b -> c) -> (a -> b) -> (a -> c)` | Function composition |
+| `<>`     | `Monoid` | `m -> m -> m`                      | alias for `mappend` for `Monoid`s, in `Data.Monoid` |
 
 
 ### Typeclasses
@@ -58,6 +60,21 @@ For now, they're all just in this file.
 * `Ord`, giving `>`, `<`, etc, and `compare` returning `Ordering`, `LT`, `EQ`, or `GT`.
 * `Enum` is for things that are enumerable, meaning they have predecessors and successors.
 * `Show` is for things that can be converted to strings, via `show :: a -> String`
+
+##### Monoid
+
+* `mempty :: m`, **identity**
+* `mappend :: m -> m -> m`, **binary operator**
+
+These come with the utilities
+
+* `mconcat :: [m] -> m`, given by `foldr mappend mempty`
+* `Data.Monoid.(<>)`, an alias for `mappend`.
+
+And some standard instances
+
+* `List` is a `Monoid` with `(++)` (concatenation) as `mappend`, and `[]` as `mempty`.
+* `Data.Monoid.Sum` and `Data.Monoid.Product` provide instances for integers
 
 
 ### syntax
