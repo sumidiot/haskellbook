@@ -39,16 +39,18 @@ For now, they're all just in this file.
 
 ### Operators
 
-| Operator | Context  | Type                               | Purpose |
-| -------- | -------- | ---------------------------------- | ------- |
-| `++`     | `List`   | `[a] -> [a] -> [a]`                | Concatenate lists, recall `String` is `[Char]` |
-| `:`      | `List`   | `a -> [a] -> [a]`                  | "cons", create a list                          |
-| `:|`     | `Data.List.NonEmpty` | `a -> [a] -> [a]`      | Create a non-empty list |
-| `!!`     | `List`   | `[a] -> Int -> a`                  | Retrieve element of list based on index |
-| `==`     | `Eq`     | `a -> a -> Bool`                   | Equality checking    |
-| `/=`     | `Eq`     | `a -> a -> Bool`                   | In-equality checking |
-| `.`      | `->`     | `(b -> c) -> (a -> b) -> (a -> c)` | Function composition |
-| `<>`     | `Monoid` | `m -> m -> m`                      | alias for `mappend` for `Monoid`s, in `Data.Monoid` |
+| Operator | Context   | Type                               | Purpose |
+| -------- | --------- | ---------------------------------- | ------- |
+| `++`     | `List`    | `[a] -> [a] -> [a]`                | Concatenate lists, recall `String` is `[Char]` |
+| `:`      | `List`    | `a -> [a] -> [a]`                  | "cons", create a list                          |
+| `:|`     | `Data.List.NonEmpty` | `a -> [a] -> [a]`       | Create a non-empty list |
+| `!!`     | `List`    | `[a] -> Int -> a`                  | Retrieve element of list based on index |
+| `==`     | `Eq`      | `a -> a -> Bool`                   | Equality checking    |
+| `/=`     | `Eq`      | `a -> a -> Bool`                   | In-equality checking |
+| `$`      | `->`      | `(a -> b) -> a -> b`               | Function application (different associativity/precedence) |
+| `.`      | `->`      | `(b -> c) -> (a -> b) -> (a -> c)` | Function composition |
+| `<>`     | `Monoid`  | `m -> m -> m`                      | alias for `mappend` for `Monoid`s, in `Data.Monoid` |
+| `<$>`    | `Functor` | `(a -> b) -> f a -> f b`           | alias for `Functor`'s `fmap` |
 
 
 ### Typeclasses
@@ -70,11 +72,13 @@ These come with the utilities
 
 * `mconcat :: [m] -> m`, given by `foldr mappend mempty`
 * `Data.Monoid.(<>)`, an alias for `mappend`.
-
-And some standard instances
-
-* `List` is a `Monoid` with `(++)` (concatenation) as `mappend`, and `[]` as `mempty`.
 * `Data.Monoid.Sum` and `Data.Monoid.Product` provide instances for integers
+
+##### Functor
+
+* `fmap :: (a -> b) -> f a -> f b`
+
+Note that `(fmap . fmap)` ends up giving you `(Functor f, Functor g) => (a -> b) -> f (g a) -> f (g b)`
 
 
 ### syntax
@@ -156,13 +160,22 @@ You can enter just the first letter of a command if it is not ambiguous
 * `:kind` shows the kind of a type
 * `:browse` lets you see the functions of a module
 
-#### Pragmas
+##### Things to set
+
+The `ghci` command `:set` lets you set compiler flags and such.
+
+* `-XTypeApplications` allows type specification so you can do things like `:type fmap @Maybe`
+
+### Pragmas
 
 Compiler extensions, added at the top of a source with with `{-# LANGUAGE PragmaName #-}`, where
 `PragmaName` is one of the following (or many others we won't get to):
 
 * `GeneralizedNewtypeDeriving`, allows you to add `deriving T` to a `newtype` declaration to automatically
     derive that the `newtype` is in the `T` typeclass, as long as the wrapped type is.
+* `RankNTypes` allows things like `type Nat f g = forall a . f a -> g a`, where some of the type
+    arguments are higher-kinded.
+* `FlexibleInstances`
 
 
 ### stack
