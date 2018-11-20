@@ -26,6 +26,9 @@ For now, they're all just in this file.
 * `foldr :: (a -> b -> b) -> b -> [a] -> b`, in older versions of GHC, see `Foldable` below
 * `foldl :: (b -> a -> b) -> b -> [a] -> b`
 * `scanr` and `scanl` are like `foldr` and `foldl` except return `[b]`, the list of intermediate results
+* `liftA :: Applicative f => (a -> b) -> f a -> f b`, alias for `<$>`
+* `liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c`, lifting a function of two arguments into an applicative context. There's also a `liftA3`
+* `lookup :: Eq a => a -> [(a, b)] -> Maybe b`
 
 ### Additional useful functions
 
@@ -51,6 +54,7 @@ For now, they're all just in this file.
 | `.`      | `->`      | `(b -> c) -> (a -> b) -> (a -> c)` | Function composition |
 | `<>`     | `Monoid`  | `m -> m -> m`                      | alias for `mappend` for `Monoid`s, in `Data.Monoid` |
 | `<$>`    | `Functor` | `(a -> b) -> f a -> f b`           | alias for `Functor`'s `fmap` |
+| `<*>`    | `Applicative` | `f (a -> b) -> f a -> f b`     | Apply a function in an applicative context |
 
 
 ### Typeclasses
@@ -65,6 +69,8 @@ For now, they're all just in this file.
 
 ##### Monoid
 
+`class Monoid m where`
+
 * `mempty :: m`, **identity**
 * `mappend :: m -> m -> m`, **binary operator**
 
@@ -76,9 +82,18 @@ These come with the utilities
 
 ##### Functor
 
+`class Functor f where`
+
 * `fmap :: (a -> b) -> f a -> f b`
 
 Note that `(fmap . fmap)` ends up giving you `(Functor f, Functor g) => (a -> b) -> f (g a) -> f (g b)`
+
+##### Applicative
+
+`class Functor f => Applicative f where`
+
+* `pure :: a -> f a`
+* `<*> :: f (a -> b) -> f a -> f b`
 
 
 ### syntax
