@@ -82,7 +82,7 @@ instance Monoid a => Applicative ((,) a) where
 
 As mentioned before, the `Maybe` applicative's `<*>` will be `Nothing` if either side is,
 or `Just` application otherwise, aligning with the analogous monoid structure on `Maybe`,
-where if either side of `|+|` is `Nothing` the whole thing is.
+where if either side of `<>` is `Nothing` the whole thing is.
 
 Different monoidal structures give different applicative structures, like you might guess,
 and we'll see more examples soon.
