@@ -39,6 +39,7 @@ For now, they're all just in this file.
 * `Data.Map.foldWithKey :: Ord k => (k -> a -> b -> b) -> b -> Map k a -> b`
 * `Data.Map.insert :: Ord k => k -> v -> Map k v -> Map k v`
 * `Data.Map.empty :: Ord k => Map k v`
+* `Control.Monad.join :: Monad m => m (m a) -> m a`
 
 ### Operators
 
@@ -55,6 +56,11 @@ For now, they're all just in this file.
 | `<>`     | `Monoid`  | `m -> m -> m`                      | alias for `mappend` for `Monoid`s, in `Data.Monoid` |
 | `<$>`    | `Functor` | `(a -> b) -> f a -> f b`           | alias for `Functor`'s `fmap` |
 | `<*>`    | `Applicative` | `f (a -> b) -> f a -> f b`     | Apply a function in an applicative context |
+| `*>`     | `Applicative` | `f a -> f a -> f b`            | Applicative sequencing, do both things, but ignore first result |
+| `>>=`    | `Monad`   | `m a -> (a -> m b) -> m b`         | Monad-ic "bind" |
+| `>>`     | `Monad`   | `m a -> m b -> m b`                | Monad-ic sequencing |
+| `>=>`    | `Monad`   | `(a -> m b) -> (b -> m c) -> a -> m c` | Kleisli "fish", monadic composition, in `Control.Monad` |
+
 
 
 ### Typeclasses
@@ -93,7 +99,19 @@ Note that `(fmap . fmap)` ends up giving you `(Functor f, Functor g) => (a -> b)
 `class Functor f => Applicative f where`
 
 * `pure :: a -> f a`
-* `<*> :: f (a -> b) -> f a -> f b`
+* `<*> :: f (a -> b) -> f a -> f b`, referred to as "ap" or "tie-fighter"
+
+`Applicative` also comes with `(*>) :: f a -> f b -> f b`, the same as `Monad`'s `(>>)`.
+
+##### Monad
+
+`class Applicative m => Monad m where`
+
+* `(>>=)  :: m a -> (a -> m b) -> m b`, also known as "bind"
+* `(>>)   :: m a -> m b -> m b`, sequences operations dropping the result of the first
+* `return :: a -> m a`, the same as `pure`
+
+Note that `fmap f xs = xs >>= return . f`.
 
 
 ### syntax
@@ -151,6 +169,9 @@ Note that `(fmap . fmap)` ends up giving you `(Functor f, Functor g) => (a -> b)
     you can refer to its exports directly. In the second, you must prefix them with `M.` (but is handy
     if there are name collisions). In the third, you prefix them with `N.`, which is handy if `M` is
     a long string.
+* `do`-syntax provides some "sugar" for applicative/monadic sequencing (`(*>)` and `(>>)`) and bind-ing
+    (`(>>=)`). Lines like `a <- b` "de-sugar" to `b >>= \a ->`. Lines without `<-` de-sugar to roughly
+    just ending the line with `>>`.
 
 
 ### ghci
